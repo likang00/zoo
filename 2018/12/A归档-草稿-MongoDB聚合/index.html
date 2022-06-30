@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="聚合管道功能： 对文档进行过滤，查询出符合条件的文档 对文档进行变换，改变文档的输出形式  使用sanic_motor模块连接数据库123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354from sanic import Sanicfrom sanic.v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB聚合">
+<meta property="og:url" content="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="聚合管道功能： 对文档进行过滤，查询出符合条件的文档 对文档进行变换，改变文档的输出形式  使用sanic_motor模块连接数据库123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354from sanic import Sanicfrom sanic.v">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-12-27T14:33:04.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:16.838Z">
+<meta property="article:author" content="Likang">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>MongoDB聚合</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2018/11/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&text=MongoDB聚合"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&is_video=false&description=MongoDB聚合"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MongoDB聚合&body=Check out this article: https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&name=MongoDB聚合&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&t=MongoDB聚合"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E7%AE%A1%E9%81%93%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">聚合管道功能：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8sanic-motor%E6%A8%A1%E5%9D%97%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">使用sanic_motor模块连接数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%81%9A%E5%90%88%E7%AE%A1%E9%81%93"><span class="toc-number">3.</span> <span class="toc-text">1.聚合管道</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%98%B6%E6%AE%B5%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">3.1.</span> <span class="toc-text">一、阶段操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-match"><span class="toc-number">3.2.</span> <span class="toc-text">2.$match</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-group"><span class="toc-number">3.3.</span> <span class="toc-text">3.$group</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-sort"><span class="toc-number">3.4.</span> <span class="toc-text">4.$sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-limit"><span class="toc-number">3.5.</span> <span class="toc-text">5.$limit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-skip"><span class="toc-number">3.6.</span> <span class="toc-text">6.$skip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-unwind"><span class="toc-number">3.7.</span> <span class="toc-text">7.$unwind</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">二、表达式操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%83%E5%B0%94%E7%AE%A1%E9%81%93%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Boolean-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1.布尔管道聚合操作（Boolean Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Set-Operators%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">2.集合操作（Set Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%AF%94%E8%BE%83%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Comparison-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">3.比较聚合操作（Comparison Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%9C%AF%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Arithmetic-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">4.算术聚合操作（Arithmetic Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88String-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">5.字符串聚合操作（String Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E7%BB%84%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Array-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">6.数组聚合操作（Array Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%97%A5%E6%9C%9F%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Date-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.7.</span> <span class="toc-text">7.日期聚合操作（Date Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Conditional-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.8.</span> <span class="toc-text">8.条件聚合操作（Conditional Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Data-Type-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.9.</span> <span class="toc-text">9.数据类型聚合操作（Data Type Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%85%B6%E4%BB%96"><span class="toc-number">4.10.</span> <span class="toc-text">10.其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8D%95%E7%9B%AE%E7%9A%84%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">2.单目的聚合操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#distinct-%E2%80%9Cname%E2%80%9D-%E2%80%9C-exists%E2%80%9D-true"><span class="toc-number">5.1.</span> <span class="toc-text">distinct(“name”:{“$exists”:true})</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#count"><span class="toc-number">5.2.</span> <span class="toc-text">count()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">5.3.</span> <span class="toc-text">几个例子</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MongoDB聚合
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-12-27T14:33:04.000Z" itemprop="datePublished">2018-12-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="https://likang00.github.io/zoo/categories/db/">db</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="聚合管道功能："><a href="#聚合管道功能：" class="headerlink" title="聚合管道功能："></a>聚合管道功能：</h1><ul>
+<li>对文档进行过滤，查询出符合条件的文档</li>
+<li>对文档进行变换，改变文档的输出形式</li>
+</ul>
+<h1 id="使用sanic-motor模块连接数据库"><a href="#使用sanic-motor模块连接数据库" class="headerlink" title="使用sanic_motor模块连接数据库"></a>使用sanic_motor模块连接数据库</h1><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sanic <span class="keyword">import</span> Sanic</span><br><span class="line"><span class="keyword">from</span> sanic.views <span class="keyword">import</span> HTTPMethodView</span><br><span class="line"><span class="keyword">from</span> sanic.response <span class="keyword">import</span> json, text, redirect, html</span><br><span class="line"><span class="keyword">from</span> sanic_motor <span class="keyword">import</span> BaseModel</span><br><span class="line"></span><br><span class="line">app = Sanic(__name__)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置数据库和集合</span></span><br><span class="line">settings = &#123;<span class="string">&#x27;MOTOR_URI&#x27;</span>: <span class="string">&#x27;mongodb://localhost:27017/XXX&#x27;</span>, <span class="string">&#x27;LOGO&#x27;</span>: <span class="literal">None</span>&#125;</span><br><span class="line">app.config.update(settings)</span><br><span class="line">app.config.RESPONSE_TIMEOUT = <span class="number">5</span>*<span class="number">60</span></span><br><span class="line">BaseModel.init_app(app)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Subjectscope</span>(<span class="title class_ inherited__">BaseModel</span>):</span><br><span class="line">    __coll__ = <span class="string">&#x27;XXX&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Subject2020</span>(<span class="title class_ inherited__">HTTPMethodView</span>):</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        UniversityList = <span class="keyword">await</span> Subjectscope.find(as_raw=<span class="literal">True</span>)</span><br><span class="line">        RucodeList = []</span><br><span class="line">        <span class="keyword">for</span> Uni <span class="keyword">in</span> UniversityList.objects:</span><br><span class="line">            Rucode = Uni.get(<span class="string">&quot;Rucode&quot;</span>, <span class="string">&quot;&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> Rucode <span class="keyword">not</span> <span class="keyword">in</span> RucodeList:</span><br><span class="line">                RucodeList.append(Rucode)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">        <span class="built_in">print</span>(RucodeList)</span><br><span class="line">        <span class="keyword">return</span> json(&#123;<span class="string">&quot;Rucode&quot;</span>: <span class="string">&quot;success&quot;</span>&#125;)</span><br><span class="line">app.add_route(Subject2020.as_view(), <span class="string">&#x27;rucodelist&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SubjectAggregate</span>(<span class="title class_ inherited__">HTTPMethodView</span>):</span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        my_pipeline =[</span><br><span class="line">            <span class="comment"># &#123;&quot;$skip&quot;:33440&#125;,</span></span><br><span class="line">            &#123;<span class="string">&quot;$match&quot;</span>:&#123;<span class="string">&quot;Rucode&quot;</span>:&#123;<span class="string">&quot;$gte&quot;</span>:<span class="string">&#x27;10001&#x27;</span>,<span class="string">&quot;$lte&quot;</span>:<span class="string">&#x27;10090&#x27;</span>&#125;&#125;&#125;,</span><br><span class="line">            <span class="comment"># &#123;&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$Rucode&quot;, &quot;count&quot;:&#123;&quot;$sum&quot;:1&#125;&#125;&#125;</span></span><br><span class="line">            &#123;<span class="string">&quot;$project&quot;</span>:&#123;</span><br><span class="line">                        <span class="string">&quot;_id&quot;</span>:<span class="number">0</span>,</span><br><span class="line">                        <span class="string">&quot;_rucode&quot;</span>:<span class="string">&quot;$Rucode&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;SchoolName&quot;</span>:<span class="number">1</span>,</span><br><span class="line">                        <span class="string">&quot;ProfessionalType&quot;</span>:<span class="number">1</span>,</span><br><span class="line">                        <span class="string">&quot;typeid&quot;</span>: &#123;<span class="string">&quot;$type&quot;</span>:<span class="string">&quot;$_id&quot;</span>&#125;,</span><br><span class="line">                        <span class="string">&quot;scopeMid&quot;</span>:<span class="string">&quot;$_id&quot;</span>&#125;&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;$sort&quot;</span>:&#123;<span class="string">&quot;_rucode&quot;</span>:-<span class="number">1</span>&#125;&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;$limit&quot;</span>:<span class="number">10</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&quot;$sample&quot;</span>:&#123;<span class="string">&quot;size&quot;</span>:<span class="number">4</span>&#125;&#125;,</span><br><span class="line">            <span class="comment"># &#123;&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$ProfessionalType&quot;,&quot;count&quot;:&#123;&quot;$sum&quot;:1&#125;&#125;&#125;</span></span><br><span class="line">            ]</span><br><span class="line">        Myaggregate = <span class="keyword">await</span> Subjectscope.aggregate(pipeline=my_pipeline)</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">len</span>(Myaggregate))</span><br><span class="line">        <span class="keyword">return</span> json(Myaggregate)</span><br><span class="line">app.add_route(SubjectAggregate.as_view(), <span class="string">&#x27;aggregate&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&quot;127.0.0.1&quot;</span>, port=<span class="number">8003</span>, workers=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&#x27;subjectscope2020_benke&#x27;).aggregate([</span><br><span class="line">    &#123;&quot;$match&quot;:&#123;&quot;Rucode&quot;:&#123;&quot;$gt&quot;:&#x27;10001&#x27;,&quot;$lte&quot;:&#x27;10003&#x27;&#125;&#125;&#125;,</span><br><span class="line">    //&#123;&quot;$project&quot;:&#123;&quot;_id&quot;:0, &quot;Rucode&quot;:1, &quot;SchoolName&quot;:1, &quot;ProfessionalType&quot;:1&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<h1 id="1-聚合管道"><a href="#1-聚合管道" class="headerlink" title="1.聚合管道"></a>1.聚合管道</h1><h2 id="一、阶段操作符"><a href="#一、阶段操作符" class="headerlink" title="一、阶段操作符"></a>一、阶段操作符</h2><p>1.$project<br><strong>提取</strong> (修改文档结构、重命名、增加或删除字段)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">getCollection</span>(<span class="string">&#x27;subjectscope2020_benke&#x27;</span>).<span class="title function_">aggregate</span>([</span><br><span class="line">&#123;<span class="attr">$project</span>:</span><br><span class="line">    &#123;<span class="attr">aid</span>:&#123;<span class="attr">$type</span>:<span class="string">&quot;$_id&quot;</span>&#125;,<span class="attr">brucode</span>:&#123;<span class="attr">$type</span>:<span class="string">&quot;$Rucode&quot;</span>&#125;,<span class="attr">cshcoolname</span>:<span class="string">&quot;$SchoolName&quot;</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h2 id="2-match"><a href="#2-match" class="headerlink" title="2.$match"></a>2.$match</h2><p><strong>筛选</strong></p>
+<h2 id="3-group"><a href="#3-group" class="headerlink" title="3.$group"></a>3.$group</h2><p><strong>分组</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// $sum	计算总和。	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, num_tutorial : &#123;$sum : <span class="string">&quot;$likes&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $avg	计算平均值	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, num_tutorial : &#123;$avg : <span class="string">&quot;$likes&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $min	获取集合中所有文档对应值得最小值。	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, num_tutorial : &#123;$min : <span class="string">&quot;$likes&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $max	获取集合中所有文档对应值得最大值。	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, num_tutorial : &#123;$max : <span class="string">&quot;$likes&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $push	在结果文档中插入值到一个数组中。	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, url : &#123;<span class="attr">$push</span>: <span class="string">&quot;$url&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $addToSet	在结果文档中插入值到一个数组中，但不创建副本。	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, url : &#123;$addToSet : <span class="string">&quot;$url&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $first	根据资源文档的排序获取第一个文档数据。	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, first_url : &#123;$first : <span class="string">&quot;$url&quot;</span>&#125;&#125;&#125;])</span><br><span class="line"><span class="comment">// $last	根据资源文档的排序获取最后一个文档数据	</span></span><br><span class="line">db.<span class="property">mycol</span>.<span class="title function_">aggregate</span>([&#123;$group : &#123;_id : <span class="string">&quot;$by_user&quot;</span>, last_url : &#123;$last : <span class="string">&quot;$url&quot;</span>&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-sort"><a href="#4-sort" class="headerlink" title="4.$sort"></a>4.$sort</h2><p><strong>排序</strong></p>
+<h2 id="5-limit"><a href="#5-limit" class="headerlink" title="5.$limit"></a>5.$limit</h2><p><strong>限制</strong></p>
+<h2 id="6-skip"><a href="#6-skip" class="headerlink" title="6.$skip"></a>6.$skip</h2><p><strong>跳过</strong></p>
+<h2 id="7-unwind"><a href="#7-unwind" class="headerlink" title="7.$unwind"></a>7.$unwind</h2><p><strong>拆分</strong></p>
+<h1 id="二、表达式操作符"><a href="#二、表达式操作符" class="headerlink" title="二、表达式操作符"></a>二、表达式操作符</h1><h2 id="1-布尔管道聚合操作（Boolean-Aggregation-Operators）"><a href="#1-布尔管道聚合操作（Boolean-Aggregation-Operators）" class="headerlink" title="1.布尔管道聚合操作（Boolean Aggregation Operators）"></a>1.布尔管道聚合操作（Boolean Aggregation Operators）</h2><p><code>$and $or $not</code></p>
+<h2 id="2-集合操作（Set-Operators）"><a href="#2-集合操作（Set-Operators）" class="headerlink" title="2.集合操作（Set Operators）"></a>2.集合操作（Set Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$setEquals </span><br><span class="line">$setIntersection </span><br><span class="line">$setUnion </span><br><span class="line">$serDifference </span><br><span class="line">$setIsSubset </span><br><span class="line">$anyElementTrue</span><br><span class="line">$allElementsTrue </span><br></pre></td></tr></table></figure>
+<h2 id="3-比较聚合操作（Comparison-Aggregation-Operators）"><a href="#3-比较聚合操作（Comparison-Aggregation-Operators）" class="headerlink" title="3.比较聚合操作（Comparison Aggregation Operators）"></a>3.比较聚合操作（Comparison Aggregation Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$cmp 比较表达式中两个值的大小，如果第一个值小于第二个值则返回-<span class="number">1</span>，相等返回<span class="number">0</span>，大于返回<span class="number">1</span>。用法&#123; <span class="attr">$cmp</span>: [ &lt;expression1&gt;, &lt;expression2&gt; ] &#125;</span><br><span class="line">$eq 比较表达式中两个是否相等，是则返回<span class="literal">true</span>，否则返回<span class="literal">false</span>。用法&#123; <span class="attr">$eq</span>: [ &lt;expression1&gt;, &lt;expression2&gt; ] &#125;</span><br><span class="line">$gt 比较表达式中第一个值是否大于第二个值，是则返回<span class="literal">true</span>，否则返回<span class="literal">false</span>。用法&#123; <span class="attr">$gt</span>: [ &lt;expression1&gt;, &lt;expression2&gt; ] &#125;</span><br><span class="line">$gte 大于等于</span><br><span class="line">$lt 比较表达式中第一个值是否小于第二个值，是则返回<span class="literal">true</span>，否则返回<span class="literal">false</span>。用法&#123; <span class="attr">$lt</span>: [ &lt;expression1&gt;, &lt;expression2&gt; ] &#125;</span><br><span class="line">$lte 小于等于</span><br><span class="line">$ne 是否不相等 not equals</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-算术聚合操作（Arithmetic-Aggregation-Operators）"><a href="#4-算术聚合操作（Arithmetic-Aggregation-Operators）" class="headerlink" title="4.算术聚合操作（Arithmetic Aggregation Operators）"></a>4.算术聚合操作（Arithmetic Aggregation Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$abs</span><br><span class="line">$add</span><br><span class="line">$ceil</span><br><span class="line">$divide</span><br><span class="line">$exp</span><br><span class="line">$floor</span><br><span class="line">$ln</span><br><span class="line">$log</span><br><span class="line">$log10</span><br><span class="line">$mod</span><br><span class="line">$multiply</span><br><span class="line">$pow</span><br><span class="line">$sqrt</span><br><span class="line">$subtract</span><br><span class="line">$trunc</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-字符串聚合操作（String-Aggregation-Operators）"><a href="#5-字符串聚合操作（String-Aggregation-Operators）" class="headerlink" title="5.字符串聚合操作（String Aggregation Operators）"></a>5.字符串聚合操作（String Aggregation Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$concat</span><br><span class="line">$indexOfBytes</span><br><span class="line">$indexOfCP</span><br><span class="line">$split</span><br><span class="line">$strLenBytes</span><br><span class="line">$strLenCP</span><br><span class="line">$strcasecmp</span><br><span class="line">$substr</span><br><span class="line">$substrBytes</span><br><span class="line">$substrCP</span><br><span class="line">$toLower</span><br><span class="line">$toUpper</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-数组聚合操作（Array-Aggregation-Operators）"><a href="#6-数组聚合操作（Array-Aggregation-Operators）" class="headerlink" title="6.数组聚合操作（Array Aggregation Operators）"></a>6.数组聚合操作（Array Aggregation Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$arrayElemAt</span><br><span class="line">$concatArrays</span><br><span class="line">$filter</span><br><span class="line">$indexOfArray</span><br><span class="line">$isArray</span><br><span class="line">$range</span><br><span class="line">$reverseArray</span><br><span class="line">$reduce</span><br><span class="line">$size</span><br><span class="line">$slice</span><br><span class="line">$zip</span><br><span class="line">$in</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-日期聚合操作（Date-Aggregation-Operators）"><a href="#7-日期聚合操作（Date-Aggregation-Operators）" class="headerlink" title="7.日期聚合操作（Date Aggregation Operators）"></a>7.日期聚合操作（Date Aggregation Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$dayOfYear</span><br><span class="line">$dayOfMonth</span><br><span class="line">$dayOfWeek</span><br><span class="line">$year</span><br><span class="line">$month</span><br><span class="line">$week</span><br><span class="line">$hour</span><br><span class="line">$minute</span><br><span class="line">$second</span><br><span class="line">$millisecond</span><br><span class="line">$dateToString</span><br><span class="line">$isoDayOfWeek</span><br><span class="line">$isoWeek</span><br><span class="line">$isoWeekYear</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-条件聚合操作（Conditional-Aggregation-Operators）"><a href="#8-条件聚合操作（Conditional-Aggregation-Operators）" class="headerlink" title="8.条件聚合操作（Conditional Aggregation Operators）"></a>8.条件聚合操作（Conditional Aggregation Operators）</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cond</span><br><span class="line">$ifNull</span><br><span class="line">$switch</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-数据类型聚合操作（Data-Type-Aggregation-Operators）"><a href="#9-数据类型聚合操作（Data-Type-Aggregation-Operators）" class="headerlink" title="9.数据类型聚合操作（Data Type Aggregation Operators）"></a>9.数据类型聚合操作（Data Type Aggregation Operators）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$type</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-其他"><a href="#10-其他" class="headerlink" title="10.其他"></a>10.其他</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$exists 存在</span></span><br><span class="line">db.<span class="property">person</span>.<span class="title function_">find</span>( &#123; <span class="attr">phone</span>: &#123; <span class="attr">$exists</span>: <span class="literal">true</span> &#125; &#125; )</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-单目的聚合操作"><a href="#2-单目的聚合操作" class="headerlink" title="2.单目的聚合操作"></a>2.单目的聚合操作</h1><p>“SS_Class_Info”:{“$exists”:true}</p>
+<h2 id="distinct-“name”-“-exists”-true"><a href="#distinct-“name”-“-exists”-true" class="headerlink" title="distinct(“name”:{“$exists”:true})"></a>distinct(“name”:{“$exists”:true})</h2><p><strong>去重</strong></p>
+<h2 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h2><p><strong>返回文档个数</strong></p>
+<hr>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 求出集合 article 中 time 值大于 2017-04-09 的文档个数</span></span><br><span class="line">db.article.count(&#123;time:&#123;$gt:newDate(<span class="string">&#x27;04/09/2017&#x27;</span>)&#125;&#125;)</span><br><span class="line"><span class="comment"># 这个语句等价于</span></span><br><span class="line">db.article.find(&#123;time:&#123;$gt:newDate(<span class="string">&#x27;04/09/2017&#x27;</span>)&#125;&#125;).count()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="几个例子"><a href="#几个例子" class="headerlink" title="几个例子"></a>几个例子</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">getCollection</span>(<span class="string">&#x27;SS_SeleCourseResult&#x27;</span>).<span class="title function_">aggregate</span>([</span><br><span class="line">&#123;<span class="string">&quot;$match&quot;</span>:&#123;<span class="string">&quot;Choose_Subject_Task_ID&quot;</span> : <span class="string">&quot;5c106c08705deb0862d3bfa9&quot;</span>&#125;&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$match&quot;</span>:&#123;<span class="string">&quot;result&quot;</span>:&#123;<span class="string">&quot;$elemMatch&quot;</span>:&#123;<span class="string">&quot;Subject&quot;</span>:<span class="string">&quot;物理&quot;</span>,<span class="string">&quot;Status&quot;</span>:<span class="number">1</span>,<span class="string">&quot;SS_Class_Info&quot;</span>:&#123;<span class="string">&quot;$exists&quot;</span>:<span class="literal">true</span>&#125;,<span class="string">&quot;SS_Class_Info.Class_Name&quot;</span>:<span class="string">&quot;物理选考2班&quot;</span>&#125;&#125;&#125;&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$unwind&quot;</span>:<span class="string">&quot;$result&quot;</span>&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$match&quot;</span>:&#123;<span class="string">&quot;result.Subject&quot;</span>:<span class="string">&quot;&quot;</span>,<span class="string">&quot;result.Status&quot;</span>:<span class="number">3</span>&#125;&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$group&quot;</span>:&#123;<span class="string">&quot;_id&quot;</span>:<span class="string">&quot;$result.SS_Class_Info.Class_Name&quot;</span>,<span class="string">&quot;studentlist&quot;</span>:&#123;<span class="string">&quot;$push&quot;</span>:<span class="string">&quot;$UserStudent_Name&quot;</span>&#125;&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">db.<span class="title function_">getCollection</span>(<span class="string">&#x27;sort_SubjectSCope2020&#x27;</span>).<span class="title function_">aggregate</span>([</span><br><span class="line">&#123;<span class="string">&quot;$match&quot;</span>:&#123;<span class="string">&quot;Rucode&quot;</span>:&#123;<span class="string">&quot;$gte&quot;</span>:<span class="string">&quot;10001&quot;</span>,<span class="string">&quot;$lt&quot;</span>:<span class="string">&quot;10002&quot;</span>&#125;&#125;&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$unwind&quot;</span>:<span class="string">&quot;$ScopeArea&quot;</span>&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$match&quot;</span>:&#123;<span class="string">&quot;ScopeArea.Province&quot;</span>:<span class="string">&quot;浙江省&quot;</span>,&#125;&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$unwind&quot;</span>:<span class="string">&quot;$ProfessionalName&quot;</span>&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$project&quot;</span>:&#123;<span class="string">&quot;_id&quot;</span>:<span class="number">0</span>,<span class="string">&quot;SchoolName&quot;</span>:<span class="number">1</span>,<span class="string">&quot;ProfessionalType&quot;</span>:<span class="number">1</span>,<span class="string">&quot;ProfessionalName&quot;</span>:<span class="number">1</span>,<span class="string">&quot;Scope&quot;</span>:<span class="number">1</span>&#125;&#125;,</span><br><span class="line">&#123;<span class="string">&quot;$group&quot;</span>:&#123;<span class="string">&quot;_id&quot;</span>:<span class="string">&quot;$Scope&quot;</span>,<span class="string">&quot;count&quot;</span>:&#123;<span class="string">&quot;$sum&quot;</span>:<span class="number">1</span>&#125;,<span class="string">&quot;pfnamelist&quot;</span>:&#123;<span class="string">&quot;$push&quot;</span>:<span class="string">&quot;$ProfessionalName&quot;</span>&#125;&#125;&#125;,</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E7%AE%A1%E9%81%93%E5%8A%9F%E8%83%BD%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">聚合管道功能：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8sanic-motor%E6%A8%A1%E5%9D%97%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.</span> <span class="toc-text">使用sanic_motor模块连接数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E8%81%9A%E5%90%88%E7%AE%A1%E9%81%93"><span class="toc-number">3.</span> <span class="toc-text">1.聚合管道</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%98%B6%E6%AE%B5%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">3.1.</span> <span class="toc-text">一、阶段操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-match"><span class="toc-number">3.2.</span> <span class="toc-text">2.$match</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-group"><span class="toc-number">3.3.</span> <span class="toc-text">3.$group</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-sort"><span class="toc-number">3.4.</span> <span class="toc-text">4.$sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-limit"><span class="toc-number">3.5.</span> <span class="toc-text">5.$limit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-skip"><span class="toc-number">3.6.</span> <span class="toc-text">6.$skip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-unwind"><span class="toc-number">3.7.</span> <span class="toc-text">7.$unwind</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">4.</span> <span class="toc-text">二、表达式操作符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%83%E5%B0%94%E7%AE%A1%E9%81%93%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Boolean-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1.布尔管道聚合操作（Boolean Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Set-Operators%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">2.集合操作（Set Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%AF%94%E8%BE%83%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Comparison-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">3.比较聚合操作（Comparison Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%AE%97%E6%9C%AF%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Arithmetic-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">4.算术聚合操作（Arithmetic Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88String-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">5.字符串聚合操作（String Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E7%BB%84%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Array-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.6.</span> <span class="toc-text">6.数组聚合操作（Array Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%97%A5%E6%9C%9F%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Date-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.7.</span> <span class="toc-text">7.日期聚合操作（Date Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E6%9D%A1%E4%BB%B6%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Conditional-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.8.</span> <span class="toc-text">8.条件聚合操作（Conditional Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C%EF%BC%88Data-Type-Aggregation-Operators%EF%BC%89"><span class="toc-number">4.9.</span> <span class="toc-text">9.数据类型聚合操作（Data Type Aggregation Operators）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%85%B6%E4%BB%96"><span class="toc-number">4.10.</span> <span class="toc-text">10.其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%8D%95%E7%9B%AE%E7%9A%84%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">2.单目的聚合操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#distinct-%E2%80%9Cname%E2%80%9D-%E2%80%9C-exists%E2%80%9D-true"><span class="toc-number">5.1.</span> <span class="toc-text">distinct(“name”:{“$exists”:true})</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#count"><span class="toc-number">5.2.</span> <span class="toc-text">count()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%A0%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">5.3.</span> <span class="toc-text">几个例子</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&text=MongoDB聚合"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&is_video=false&description=MongoDB聚合"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MongoDB聚合&body=Check out this article: https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&name=MongoDB聚合&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&t=MongoDB聚合"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="云服务器入门购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker(一个应用容器引擎)来管理和发布。使用的SSH终端为Xshell6(或者PuTTY)。还可以用WinSCP互传文件。重点记录Docker的使用。 Docker[针对CentOS7.5]安装yum install -y docker # 安装dockersystemctl start docker # 启动d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker笔记1">
+<meta property="og:url" content="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="云服务器入门购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker(一个应用容器引擎)来管理和发布。使用的SSH终端为Xshell6(或者PuTTY)。还可以用WinSCP互传文件。重点记录Docker的使用。 Docker[针对CentOS7.5]安装yum install -y docker # 安装dockersystemctl start docker # 启动d">
+<meta property="og:locale">
+<meta property="og:image" content="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/docker01.jpg">
+<meta property="article:published_time" content="2019-01-18T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:16.833Z">
+<meta property="article:author" content="Likang">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/docker01.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Docker笔记1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&text=Docker笔记1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&is_video=false&description=Docker笔记1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker笔记1&body=Check out this article: https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&name=Docker笔记1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&t=Docker笔记1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">云服务器入门</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%B4%AD%E4%B9%B0%E4%BA%86%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E5%A6%82%E4%BD%95%E5%B0%86%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%EF%BC%8C%E8%BF%99%E9%87%8C%E4%BD%BF%E7%94%A8%E4%BA%86Docker-%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E-%E6%9D%A5%E7%AE%A1%E7%90%86%E5%92%8C%E5%8F%91%E5%B8%83%E3%80%82"><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker(一个应用容器引擎)来管理和发布。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%9A%84SSH%E7%BB%88%E7%AB%AF%E4%B8%BAXshell6-%E6%88%96%E8%80%85PuTTY-%E3%80%82"><span class="toc-number">1.0.0.0.0.2.</span> <span class="toc-text">使用的SSH终端为Xshell6(或者PuTTY)。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%98%E5%8F%AF%E4%BB%A5%E7%94%A8WinSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%E3%80%82"><span class="toc-number">1.0.0.0.0.3.</span> <span class="toc-text">还可以用WinSCP互传文件。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E7%82%B9%E8%AE%B0%E5%BD%95Docker%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%82"><span class="toc-number">1.0.0.0.0.4.</span> <span class="toc-text">重点记录Docker的使用。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker"><span class="toc-number">1.0.1.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9CentOS7-5"><span class="toc-number">1.0.2.</span> <span class="toc-text">[针对CentOS7.5]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">核心命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F-%E4%BB%A5%E9%85%8D%E7%BD%AEsanic%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">开始制作镜像 [以配置sanic环境为例]</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E5%88%9B%E5%BB%BA"><span class="toc-number">1.0.2.3.1.</span> <span class="toc-text">1创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E6%9B%B4%E6%96%B0"><span class="toc-number">1.0.2.3.2.</span> <span class="toc-text">2更新</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.0.2.3.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8-Docker-commit"><span class="toc-number">1.0.2.3.4.</span> <span class="toc-text">备注 Docker commit</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test-%E9%83%A8%E7%BD%B2main-py%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">test [部署main.py文件]</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-docker%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">1.0.2.4.1.</span> <span class="toc-text">1 docker命令行启动容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8docker-compose%E5%91%BD%E4%BB%A4%E9%83%A8%E7%BD%B2"><span class="toc-number">1.0.2.4.2.</span> <span class="toc-text">2 使用docker-compose命令部署</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%9B%B8%E5%85%B3%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">删除相关的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%E5%90%8E%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">更新代码后的部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.0.2.7.1.</span> <span class="toc-text">[Dockerfile]</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#docker-compose-yaml"><span class="toc-number">1.0.2.7.2.</span> <span class="toc-text">[docker-compose.yaml]</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2%E5%8F%8A%E6%96%87%E7%AB%A0"><span class="toc-number">1.1.</span> <span class="toc-text">参考博客及文章</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Docker笔记1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-01-18T04:00:00.000Z" itemprop="datePublished">2019-01-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="https://likang00.github.io/zoo/categories/Docker/">Docker</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/Docker/" rel="tag">Docker</a>, <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="云服务器入门"><a href="#云服务器入门" class="headerlink" title="云服务器入门"></a>云服务器入门</h1><h6 id="购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker-一个应用容器引擎-来管理和发布。"><a href="#购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker-一个应用容器引擎-来管理和发布。" class="headerlink" title="购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker(一个应用容器引擎)来管理和发布。"></a>购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker(一个应用容器引擎)来管理和发布。</h6><h6 id="使用的SSH终端为Xshell6-或者PuTTY-。"><a href="#使用的SSH终端为Xshell6-或者PuTTY-。" class="headerlink" title="使用的SSH终端为Xshell6(或者PuTTY)。"></a>使用的SSH终端为Xshell6(或者PuTTY)。</h6><h6 id="还可以用WinSCP互传文件。"><a href="#还可以用WinSCP互传文件。" class="headerlink" title="还可以用WinSCP互传文件。"></a>还可以用WinSCP互传文件。</h6><h6 id="重点记录Docker的使用。"><a href="#重点记录Docker的使用。" class="headerlink" title="重点记录Docker的使用。"></a>重点记录Docker的使用。</h6><p><img src="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/docker01.jpg" alt="avatar"></p>
+<h3 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h3><h3 id="针对CentOS7-5"><a href="#针对CentOS7-5" class="headerlink" title="[针对CentOS7.5]"></a>[针对CentOS7.5]</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>yum install -y docker # 安装docker<br>systemctl start docker # 启动docker<br>docker search python<br>docker pull python</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- systemctl docker start </span><br><span class="line">- systemctl docker restart </span><br><span class="line">- systemctl docker stop</span><br></pre></td></tr></table></figure>
+<h4 id="核心命令"><a href="#核心命令" class="headerlink" title="核心命令"></a>核心命令</h4><p>docker images 查看镜像<br>docker ps 查看正在运行的容器<br>docker ps -a 查看所有容器</p>
+<h4 id="开始制作镜像-以配置sanic环境为例"><a href="#开始制作镜像-以配置sanic环境为例" class="headerlink" title="开始制作镜像 [以配置sanic环境为例]"></a>开始制作镜像 [以配置sanic环境为例]</h4><h5 id="1创建"><a href="#1创建" class="headerlink" title="1创建"></a>1创建</h5><p>docker run -it python “/bin/bash”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python -V</span><br><span class="line">pip -V</span><br><span class="line">pip list</span><br><span class="line">pip install sanic</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>docker commit xxxxxxxxxxxx sanic:latest</p>
+<h5 id="2更新"><a href="#2更新" class="headerlink" title="2更新"></a>2更新</h5><p>docker run -it sanic</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install sanic-motor</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>docker commit xxxxxxxxxxxx sanic 会覆盖原本镜像</p>
+<h5 id><a href="#" class="headerlink" title></a></h5><h5 id="备注-Docker-commit"><a href="#备注-Docker-commit" class="headerlink" title="备注 Docker commit"></a>备注 Docker commit</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br><span class="line">options说明</span><br><span class="line">-a:提交的镜像作者</span><br><span class="line">-c:使用Dockerfile指令来创建镜像</span><br><span class="line">-m:提交时的说明文字</span><br><span class="line">-p:在commit时，将容器暂停</span><br><span class="line"># test</span><br><span class="line">runoob@runoob:~$ docker commit -a &quot;runoob.com&quot; -m &quot;my apache&quot; a404c6c174a2  mymysql:v1 </span><br><span class="line">sha256:37af1236adef1544e8886be23010b66577647a40bc02c0885a6600b33ee28057</span><br></pre></td></tr></table></figure>
+
+<h4 id="test-部署main-py文件"><a href="#test-部署main-py文件" class="headerlink" title="test [部署main.py文件]"></a>test [部署main.py文件]</h4><h5 id="1-docker命令行启动容器"><a href="#1-docker命令行启动容器" class="headerlink" title="1 docker命令行启动容器"></a>1 docker命令行启动容器</h5><p>mkdir /var/local/myproject<br>cd /var/local/myproject/<br>vim main.py<br>vim Dockerfile # 关键<br>docker build -t zlktest .<br>docker run -d –name=zlktest -p 80:8000 zlktest</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># test</span><br><span class="line">docker run --name quotation_api -itd -p 5000:5000 -v /home/quotation:/code quotation_dev:latest</span><br><span class="line">--name为容器命名；</span><br><span class="line">-itd  输入输出终端，后台运行</span><br><span class="line">-p   host端口:容器端口    用5000是flask默认</span><br><span class="line">-v  host路径:容器内路径</span><br><span class="line">最后是使用的镜像名（前面刚用dockerfile build出来的）</span><br></pre></td></tr></table></figure>
+<h5 id="2-使用docker-compose命令部署"><a href="#2-使用docker-compose命令部署" class="headerlink" title="2 使用docker-compose命令部署"></a>2 使用docker-compose命令部署</h5><p>yum install -y docker-compose<br>cd /var/local/myproject/<br>touch docker-compose.yaml<br>docker-compose up -d</p>
+<h4 id="删除相关的命令"><a href="#删除相关的命令" class="headerlink" title="删除相关的命令"></a>删除相关的命令</h4><p>docker rmi xxxxxxxxxxxx<br>docker rm -f xxxxxxxxxxxx</p>
+<h4 id="更新代码后的部署"><a href="#更新代码后的部署" class="headerlink" title="更新代码后的部署"></a>更新代码后的部署</h4><p>停止服务、删除容器<br>cd /var/local/myproject/<br>docker ps -a #查看容器名称<br>docker stop zlktest1<br>删除容器 zlktest1<br>更新main.py<br>docker build -it zlktest .<br>docker-compose up -d<br>这时删除过期镜像 [None]</p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><h5 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="[Dockerfile]"></a>[Dockerfile]</h5><p>自动化image构建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM sanic</span><br><span class="line">WORKDIR /zlk</span><br><span class="line">COPY . .</span><br><span class="line">CMD [&quot;python&quot;,&quot;main.py&quot;]</span><br></pre></td></tr></table></figure>
+<p>FROM {base镜像}:必须放在DOckerfile的第一行，表示从哪个baseimage开始构建<br>MAINTAINER:可选,标识image作者<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/51kata/p/5264894.html" title="拷贝到镜像">ADD&amp;&amp;COPY:</a><br>CMD：<br>　　CMD的作用是作为执行container时候的默认行为（容器默认的启动命令）<br>　　当运行container的时候声明了command，则不再用image中的CMD默认所定义的命令<br>　　一个Dockerfile中只能有一个有效的CMD，当定义多个CMD的时候，只有最后一个才会起作用<br>CMD定义的三种方式：<br>　　CMD <cmd> 这个会当作/bin/sh -c “cmd”来执行<br>　　CMD [“executable”,”arg1”,….]<br>　　CMD [“arg1”,”arg2”]，这个时候CMD作为ENTRYPOINT的参数</cmd></p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Dockerfile语法</span><br><span class="line">Dockerfile的指令是忽略大小写的，建议使用大写，使用 # 作为注释，每一行只支持一条指令</span><br><span class="line"></span><br><span class="line">FROM： 目地：指定基础的image，表示新程序基于哪个image构建新image 语法： FROM &lt;image&gt;:&lt;tag&gt;tag：版本号，如果没有，则使用最新版本</span><br><span class="line">MAINTAINER 指定镜像创建者信息 语法：MAINTAINER &lt;name&gt;</span><br><span class="line">&lt;!-- RUN RUN可以运行任何被基础image支持的命令 --&gt;</span><br><span class="line"></span><br><span class="line">WORKDIR 切换目录。可以多次切换工作目录(相当于cd命令)</span><br><span class="line"></span><br><span class="line">ENV 在image中设置一个环境变量。</span><br><span class="line"></span><br><span class="line">EXPOSE 指定容器需要映射到宿主机器的端口</span><br><span class="line">    EXPOSE port1</span><br><span class="line">    &lt;==&gt;</span><br><span class="line">    docker run -p port1 image</span><br><span class="line"></span><br><span class="line">    EXPOSE port1 port2 port3</span><br><span class="line">    &lt;==&gt;</span><br><span class="line">    docker run -p port1  -p port2 -p port3 image</span><br><span class="line"></span><br><span class="line">VOLUME 指定挂载点.</span><br><span class="line">运行通过该Dockerfile生成image的容器，/tmp/data目录中的数据在容器关闭后，里面的数据还存在</span><br><span class="line"></span><br><span class="line">ADD 从src复制文件到容器的的dest路径</span><br><span class="line">    ADD &lt;src&gt; &lt;dest&gt;</span><br><span class="line">    &lt;src&gt; 源目录/文件</span><br><span class="line">    &lt;dest&gt; 容器中的绝对路径</span><br><span class="line"></span><br><span class="line">CMD</span><br></pre></td></tr></table></figure>
+<p>dockerfile:<br><a target="_blank" rel="noopener" href="http://baijiahao.baidu.com/s?id=1601896555302433815&amp;wfr=spider&amp;for=pc">http://baijiahao.baidu.com/s?id=1601896555302433815&amp;wfr=spider&amp;for=pc</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/boshen-hzb/p/6400272.html">https://www.cnblogs.com/boshen-hzb/p/6400272.html</a></p>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line">简单的单机部署</span><br><span class="line">python 环境搭建</span><br><span class="line">Dockerfile</span><br><span class="line"></span><br><span class="line">ENV PYTHONUNBUFFERED 1</span><br><span class="line">RUN mkdir /root/testdjango/code    #都写上绝对路径</span><br><span class="line">WORKDIR /root/testdjango/code</span><br><span class="line">ADD requirements.txt /root/testdjango/code/</span><br><span class="line">RUN pip install -r requirements.txt</span><br><span class="line">ADD . /root/testdjango/code/</span><br><span class="line">python 的pip 有一个requirements.txt 文件来专门放依赖环境的</span><br><span class="line"></span><br><span class="line">django 环境搭建</span><br><span class="line">requirements.txt</span><br><span class="line"></span><br><span class="line">Django</span><br><span class="line">psycopg2</span><br><span class="line">docker-compose.yml 写作</span><br><span class="line">db:</span><br><span class="line">  image: postgres</span><br><span class="line">web:</span><br><span class="line">  build: .</span><br><span class="line">  command: python manage.py runserver 0.0.0.0:8000</span><br><span class="line">  volumes:</span><br><span class="line">    - .:/code</span><br><span class="line">  ports:</span><br><span class="line">    - &quot;8000:8000&quot;</span><br><span class="line">  links:</span><br><span class="line">    - db</span><br><span class="line">django 构建工程</span><br><span class="line">docker-compose run web django-admin.py startproject docker_composeexample .</span><br><span class="line"></span><br><span class="line">django 数据库设定</span><br><span class="line">我们做了 volumes， django 的东西在本地有映射。</span><br><span class="line">做过 django 的人都知道 ，我们的设定都在 settings.py 中</span><br><span class="line"></span><br><span class="line">root@ubuntu:~/testdjango/docker_composeexample# cat settings.py </span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">Django settings for docker_composeexample project.</span><br><span class="line"></span><br><span class="line">Generated by &#x27;django-admin startproject&#x27; using Django 1.10.6.</span><br><span class="line"></span><br><span class="line">For more information on this file, see</span><br><span class="line">https://docs.djangoproject.com/en/1.10/topics/settings/</span><br><span class="line"></span><br><span class="line">For the full list of settings and their values, see</span><br><span class="line">https://docs.djangoproject.com/en/1.10/ref/settings/</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line"># Build paths inside the project like this: os.path.join(BASE_DIR, ...)</span><br><span class="line">BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Quick-start development settings - unsuitable for production</span><br><span class="line"># See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/</span><br><span class="line"></span><br><span class="line"># SECURITY WARNING: keep the secret key used in production secret!</span><br><span class="line">SECRET_KEY = &#x27;3*@nbl2pu$hdmpe-hy&amp;iko_cr_-$%9g=nu2=3x_^g(vy2463d6&#x27;</span><br><span class="line"></span><br><span class="line"># SECURITY WARNING: don&#x27;t run with debug turned on in production!</span><br><span class="line">DEBUG = True</span><br><span class="line"></span><br><span class="line">ALLOWED_HOSTS = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Application definition</span><br><span class="line"></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    &#x27;django.contrib.admin&#x27;,</span><br><span class="line">    &#x27;django.contrib.auth&#x27;,</span><br><span class="line">    &#x27;django.contrib.contenttypes&#x27;,</span><br><span class="line">    &#x27;django.contrib.sessions&#x27;,</span><br><span class="line">    &#x27;django.contrib.messages&#x27;,</span><br><span class="line">    &#x27;django.contrib.staticfiles&#x27;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">MIDDLEWARE = [</span><br><span class="line">    &#x27;django.middleware.security.SecurityMiddleware&#x27;,</span><br><span class="line">    &#x27;django.contrib.sessions.middleware.SessionMiddleware&#x27;,</span><br><span class="line">    &#x27;django.middleware.common.CommonMiddleware&#x27;,</span><br><span class="line">    &#x27;django.middleware.csrf.CsrfViewMiddleware&#x27;,</span><br><span class="line">    &#x27;django.contrib.auth.middleware.AuthenticationMiddleware&#x27;,</span><br><span class="line">    &#x27;django.contrib.messages.middleware.MessageMiddleware&#x27;,</span><br><span class="line">    &#x27;django.middleware.clickjacking.XFrameOptionsMiddleware&#x27;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">ROOT_URLCONF = &#x27;docker_composeexample.urls&#x27;</span><br><span class="line"></span><br><span class="line">TEMPLATES = [</span><br><span class="line">    &#123;</span><br><span class="line">        &#x27;BACKEND&#x27;: &#x27;django.template.backends.django.DjangoTemplates&#x27;,</span><br><span class="line">        &#x27;DIRS&#x27;: [],</span><br><span class="line">        &#x27;APP_DIRS&#x27;: True,</span><br><span class="line">        &#x27;OPTIONS&#x27;: &#123;</span><br><span class="line">            &#x27;context_processors&#x27;: [</span><br><span class="line">                &#x27;django.template.context_processors.debug&#x27;,</span><br><span class="line">                &#x27;django.template.context_processors.request&#x27;,</span><br><span class="line">                &#x27;django.contrib.auth.context_processors.auth&#x27;,</span><br><span class="line">                &#x27;django.contrib.messages.context_processors.messages&#x27;,</span><br><span class="line">            ],</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">WSGI_APPLICATION = &#x27;docker_composeexample.wsgi.application&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Database</span><br><span class="line"># https://docs.djangoproject.com/en/1.10/ref/settings/#databases</span><br><span class="line"></span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    &#x27;default&#x27;: &#123;</span><br><span class="line">        &#x27;ENGINE&#x27;: &#x27;django.db.backends.sqlite3&#x27;,</span><br><span class="line">        &#x27;NAME&#x27;: os.path.join(BASE_DIR, &#x27;db.sqlite3&#x27;),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Password validation</span><br><span class="line"># https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators</span><br><span class="line"></span><br><span class="line">AUTH_PASSWORD_VALIDATORS = [</span><br><span class="line">    &#123;</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;django.contrib.auth.password_validation.UserAttributeSimilarityValidator&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;django.contrib.auth.password_validation.MinimumLengthValidator&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;django.contrib.auth.password_validation.CommonPasswordValidator&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;django.contrib.auth.password_validation.NumericPasswordValidator&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Internationalization</span><br><span class="line"># https://docs.djangoproject.com/en/1.10/topics/i18n/</span><br><span class="line"></span><br><span class="line">LANGUAGE_CODE = &#x27;en-us&#x27;</span><br><span class="line"></span><br><span class="line">TIME_ZONE = &#x27;UTC&#x27;</span><br><span class="line"></span><br><span class="line">USE_I18N = True</span><br><span class="line"></span><br><span class="line">USE_L10N = True</span><br><span class="line"></span><br><span class="line">USE_TZ = True</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Static files (CSS, JavaScript, Images)</span><br><span class="line"># https://docs.djangoproject.com/en/1.10/howto/static-files/</span><br><span class="line"></span><br><span class="line">STATIC_URL = &#x27;/static/&#x27;</span><br><span class="line">root@ubuntu:~/testdjango/docker_composeexample# </span><br><span class="line">我们只设置 数据库</span><br><span class="line"></span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    &#x27;default&#x27;: &#123;</span><br><span class="line">        &#x27;ENGINE&#x27;: &#x27;django.db.backends.postgresql_psycopg2&#x27;,</span><br><span class="line">        &#x27;NAME&#x27;: &#x27;postgres&#x27;,</span><br><span class="line">        &#x27;USER&#x27;: &#x27;postgres&#x27;,</span><br><span class="line">        &#x27;HOST&#x27;: &#x27;db&#x27;,</span><br><span class="line">        &#x27;PORT&#x27;: 5432,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">开始运行</span><br><span class="line">docker-compose up</span><br><span class="line"></span><br><span class="line">数据库同步</span><br><span class="line">docker-compose run web python manage.py syncdb</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="docker-compose-yaml"><a href="#docker-compose-yaml" class="headerlink" title="[docker-compose.yaml]"></a>[docker-compose.yaml]</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">version: &quot;3.3&quot;</span><br><span class="line">services:</span><br><span class="line">  zlktest1:</span><br><span class="line">    image: zlktest</span><br><span class="line">    container_name: zlktest1</span><br><span class="line">    ports:</span><br><span class="line">      - 80:8000</span><br><span class="line">    expose:</span><br><span class="line">      - &quot;8000&quot;</span><br><span class="line">    entrypoint: [&quot;python&quot;, &quot;main.py&quot;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考博客及文章"><a href="#参考博客及文章" class="headerlink" title="参考博客及文章"></a>参考博客及文章</h2><p>docker-中文手册<br><a target="_blank" rel="noopener" href="http://www.docker.org.cn/book/docker/what-is-docker-16.html">http://www.docker.org.cn/book/docker/what-is-docker-16.html</a><br>使用docker-compose 来部署服务<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/neptunemoon/p/6512121.html">https://www.cnblogs.com/neptunemoon/p/6512121.html</a><br>docker之Dockerfile指令介绍<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jsonhc/p/7766841.html">https://www.cnblogs.com/jsonhc/p/7766841.html</a><br>docker之Dockerfile实践<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jsonhc/p/7767669.html">https://www.cnblogs.com/jsonhc/p/7767669.html</a><br>docker之手动构建新的镜像<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jsonhc/p/7766561.html">https://www.cnblogs.com/jsonhc/p/7766561.html</a><br>Docker 命令大全<br><a target="_blank" rel="noopener" href="http://www.runoob.com/docker/docker-command-manual.html">http://www.runoob.com/docker/docker-command-manual.html</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">云服务器入门</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%B4%AD%E4%B9%B0%E4%BA%86%E8%85%BE%E8%AE%AF%E4%BA%91%E7%9A%84%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E5%A6%82%E4%BD%95%E5%B0%86%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%EF%BC%8C%E8%BF%99%E9%87%8C%E4%BD%BF%E7%94%A8%E4%BA%86Docker-%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8%E5%AE%B9%E5%99%A8%E5%BC%95%E6%93%8E-%E6%9D%A5%E7%AE%A1%E7%90%86%E5%92%8C%E5%8F%91%E5%B8%83%E3%80%82"><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">购买了腾讯云的云服务器，开始学习如何将代码部署到服务器上，这里使用了Docker(一个应用容器引擎)来管理和发布。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E7%9A%84SSH%E7%BB%88%E7%AB%AF%E4%B8%BAXshell6-%E6%88%96%E8%80%85PuTTY-%E3%80%82"><span class="toc-number">1.0.0.0.0.2.</span> <span class="toc-text">使用的SSH终端为Xshell6(或者PuTTY)。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%98%E5%8F%AF%E4%BB%A5%E7%94%A8WinSCP%E4%BA%92%E4%BC%A0%E6%96%87%E4%BB%B6%E3%80%82"><span class="toc-number">1.0.0.0.0.3.</span> <span class="toc-text">还可以用WinSCP互传文件。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E7%82%B9%E8%AE%B0%E5%BD%95Docker%E7%9A%84%E4%BD%BF%E7%94%A8%E3%80%82"><span class="toc-number">1.0.0.0.0.4.</span> <span class="toc-text">重点记录Docker的使用。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker"><span class="toc-number">1.0.1.</span> <span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%92%88%E5%AF%B9CentOS7-5"><span class="toc-number">1.0.2.</span> <span class="toc-text">[针对CentOS7.5]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">核心命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%88%B6%E4%BD%9C%E9%95%9C%E5%83%8F-%E4%BB%A5%E9%85%8D%E7%BD%AEsanic%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">开始制作镜像 [以配置sanic环境为例]</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E5%88%9B%E5%BB%BA"><span class="toc-number">1.0.2.3.1.</span> <span class="toc-text">1创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E6%9B%B4%E6%96%B0"><span class="toc-number">1.0.2.3.2.</span> <span class="toc-text">2更新</span></a></li><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.0.2.3.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8-Docker-commit"><span class="toc-number">1.0.2.3.4.</span> <span class="toc-text">备注 Docker commit</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test-%E9%83%A8%E7%BD%B2main-py%E6%96%87%E4%BB%B6"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">test [部署main.py文件]</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-docker%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">1.0.2.4.1.</span> <span class="toc-text">1 docker命令行启动容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8docker-compose%E5%91%BD%E4%BB%A4%E9%83%A8%E7%BD%B2"><span class="toc-number">1.0.2.4.2.</span> <span class="toc-text">2 使用docker-compose命令部署</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%9B%B8%E5%85%B3%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.2.5.</span> <span class="toc-text">删除相关的命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E4%BB%A3%E7%A0%81%E5%90%8E%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="toc-number">1.0.2.6.</span> <span class="toc-text">更新代码后的部署</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">1.0.2.7.</span> <span class="toc-text">补充</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.0.2.7.1.</span> <span class="toc-text">[Dockerfile]</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#docker-compose-yaml"><span class="toc-number">1.0.2.7.2.</span> <span class="toc-text">[docker-compose.yaml]</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%8D%9A%E5%AE%A2%E5%8F%8A%E6%96%87%E7%AB%A0"><span class="toc-number">1.1.</span> <span class="toc-text">参考博客及文章</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&text=Docker笔记1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&is_video=false&description=Docker笔记1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker笔记1&body=Check out this article: https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&title=Docker笔记1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&name=Docker笔记1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/&t=Docker笔记1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

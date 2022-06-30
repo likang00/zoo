@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MySQL 必知必会命令行登录mysql添加mysql.exe所在路径到系统环境变量 -h : 指定客户端所要登录的 MySQL 主机名, 登录本机(localhost 或 127.0.0.1)该参数可以省略;-P : 端口号(大写)-u : 登录的用户名;-p : 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此选项。 本地mysql -u root -p 腾讯云m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL必知必会">
+<meta property="og:url" content="https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="MySQL 必知必会命令行登录mysql添加mysql.exe所在路径到系统环境变量 -h : 指定客户端所要登录的 MySQL 主机名, 登录本机(localhost 或 127.0.0.1)该参数可以省略;-P : 端口号(大写)-u : 登录的用户名;-p : 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此选项。 本地mysql -u root -p 腾讯云m">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-07-08T02:43:53.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:08.318Z">
+<meta property="article:author" content="Likang">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>SQL必知必会</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&text=SQL必知必会"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&is_video=false&description=SQL必知必会"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SQL必知必会&body=Check out this article: https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&name=SQL必知必会&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&t=SQL必知必会"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">MySQL 必知必会</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%99%BB%E5%BD%95mysql"><span class="toc-number">1.1.</span> <span class="toc-text">命令行登录mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">了解数据库和表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.</span> <span class="toc-text">检索数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">1.4.</span> <span class="toc-text">排序检索数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">1.5.</span> <span class="toc-text">过滤数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4"><span class="toc-number">1.6.</span> <span class="toc-text">数据过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BF%9B%E8%A1%8C%E8%BF%87%E6%BB%A4"><span class="toc-number">1.7.</span> <span class="toc-text">用通配符进行过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E8%A1%8C%E6%90%9C%E7%B4%A0"><span class="toc-number">1.8.</span> <span class="toc-text">用正则表达式进行搜素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5"><span class="toc-number">1.9.</span> <span class="toc-text">计算字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE"><span class="toc-number">1.11.</span> <span class="toc-text">汇总数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.12.</span> <span class="toc-text">分组数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.13.</span> <span class="toc-text">子查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E7%BB%93%E8%A1%A8"><span class="toc-number">1.14.</span> <span class="toc-text">联结表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.15.</span> <span class="toc-text">组合查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2"><span class="toc-number">1.16.</span> <span class="toc-text">全文检索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.17.</span> <span class="toc-text">存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E6%A0%87"><span class="toc-number">1.18.</span> <span class="toc-text">游标</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">MySQL数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">串数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">数值数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">日期时间类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">二进制数据类型</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        SQL必知必会
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-07-08T02:43:53.000Z" itemprop="datePublished">2019-07-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="MySQL-必知必会"><a href="#MySQL-必知必会" class="headerlink" title="MySQL 必知必会"></a>MySQL 必知必会</h1><h2 id="命令行登录mysql"><a href="#命令行登录mysql" class="headerlink" title="命令行登录mysql"></a>命令行登录mysql</h2><p>添加mysql.exe所在路径到系统环境变量</p>
+<p>-h : 指定客户端所要登录的 MySQL 主机名, 登录本机(localhost 或 127.0.0.1)该参数可以省略;<br>-P : 端口号(大写)<br>-u : 登录的用户名;<br>-p : 告诉服务器将会使用一个密码来登录, 如果所要登录的用户名密码为空, 可以忽略此选项。</p>
+<p><em>本地</em><br><code>mysql -u root -p</code></p>
+<p><em>腾讯云mysql</em><br><code>mysql -h cdb-a5oi3xsc.bj.tencentcdb.com -P 10087 -u root -p</code></p>
+<h2 id="了解数据库和表"><a href="#了解数据库和表" class="headerlink" title="了解数据库和表"></a>了解数据库和表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 获取数据库和表信息</span></span><br><span class="line"><span class="keyword">SHOW</span> DATABASES;</span><br><span class="line">USE likang;</span><br><span class="line"><span class="keyword">SHOW</span> TABLES;</span><br><span class="line"><span class="keyword">SHOW</span> COLUMNS <span class="keyword">FROM</span> customers;</span><br><span class="line"><span class="keyword">DESCRIBE</span> customers; <span class="comment">-- 同上</span></span><br><span class="line"><span class="keyword">SHOW</span> STATUS;</span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> customers;</span><br><span class="line"><span class="keyword">SHOW</span> GRANTS;</span><br></pre></td></tr></table></figure>
+
+<h2 id="检索数据"><a href="#检索数据" class="headerlink" title="检索数据"></a>检索数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 检索单个列 </span></span><br><span class="line"><span class="keyword">select</span> columnName <span class="keyword">from</span> tableName;</span><br><span class="line"><span class="comment">-- 检索多个列 </span></span><br><span class="line"><span class="keyword">select</span> columnName1, columnName2 ... <span class="keyword">from</span> tableName;</span><br><span class="line"><span class="comment">-- 检索所有列 </span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tableName;</span><br><span class="line"><span class="comment">-- 检索不同的行 </span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> <span class="keyword">from</span> tableName;</span><br><span class="line"><span class="comment">-- 限制结果 </span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tableName limit <span class="number">5</span>;</span><br><span class="line"><span class="comment">-- 使用完全限定的表名</span></span><br><span class="line"><span class="keyword">select</span> tableName.columnName <span class="keyword">from</span> tableName;</span><br></pre></td></tr></table></figure>
+
+<h2 id="排序检索数据"><a href="#排序检索数据" class="headerlink" title="排序检索数据"></a>排序检索数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 排序数据 (用非检索的列排序数据是完全合法的)</span></span><br><span class="line"><span class="keyword">select</span> columnName <span class="keyword">from</span> tableName <span class="keyword">order</span> <span class="keyword">by</span> columnName;</span><br><span class="line"><span class="comment">-- 按多个列排序</span></span><br><span class="line"><span class="keyword">select</span> columnName1, columnName2 <span class="keyword">from</span> tableName <span class="keyword">order</span> <span class="keyword">by</span> columnName1, columnName2;</span><br><span class="line"><span class="comment">-- 指定排序方向 (若不指定 则默认为升序asc)</span></span><br><span class="line"><span class="keyword">select</span> columnName <span class="keyword">from</span> tableName <span class="keyword">order</span> <span class="keyword">by</span> columnName <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤数据"><a href="#过滤数据" class="headerlink" title="过滤数据"></a>过滤数据</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- where 子句</span></span><br><span class="line"><span class="keyword">select</span> columnName <span class="keyword">from</span> tableName <span class="keyword">where</span> columnName <span class="operator">=</span> <span class="string">&#x27;xxx&#x27;</span>;</span><br><span class="line"><span class="comment">-- where 子句操作符</span></span><br><span class="line"><span class="operator">=</span> <span class="operator">&lt;&gt;</span> <span class="operator">!=</span> <span class="operator">&lt;</span> <span class="operator">&lt;=</span> <span class="operator">&gt;</span> <span class="operator">&gt;=</span> <span class="keyword">between</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 组合where子句</span></span><br><span class="line"><span class="keyword">and</span> <span class="keyword">or</span> 计算次序 <span class="keyword">in</span> <span class="keyword">not</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="用通配符进行过滤"><a href="#用通配符进行过滤" class="headerlink" title="用通配符进行过滤"></a>用通配符进行过滤</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- LIKE操作符</span></span><br><span class="line"><span class="comment">-- % 表示 任何字符出现任意次数</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tableName <span class="keyword">where</span> <span class="keyword">column</span> <span class="keyword">like</span> <span class="string">&#x27;xxx%&#x27;</span>;</span><br><span class="line"><span class="comment">-- _表示 任何字符出现一次</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tableName <span class="keyword">where</span> <span class="keyword">column</span> <span class="keyword">like</span> <span class="string">&#x27;xxx_&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用正则表达式进行搜素"><a href="#用正则表达式进行搜素" class="headerlink" title="用正则表达式进行搜素"></a>用正则表达式进行搜素</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tableName <span class="keyword">where</span> <span class="keyword">column</span> regexp <span class="string">&#x27;xxx&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="计算字段"><a href="#计算字段" class="headerlink" title="计算字段"></a>计算字段</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 拼接</span></span><br><span class="line">concat()</span><br><span class="line"><span class="comment">-- 算数</span></span><br><span class="line"><span class="operator">+</span> <span class="operator">-</span> <span class="operator">*</span> <span class="operator">/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>可移植性不强 几乎每个DBMS都支持特有的函数<br>大体分为四类<br>1.字符串处理函数<br>2.日期时间函数<br>3.数值处理函数<br>4.自定义函数</p>
+<h2 id="汇总数据"><a href="#汇总数据" class="headerlink" title="汇总数据"></a>汇总数据</h2><p><strong>聚集函数</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- MySQL聚集函数</span></span><br><span class="line"><span class="built_in">AVG</span>() 平均</span><br><span class="line"><span class="built_in">COUNT</span>() 行数</span><br><span class="line"><span class="built_in">MAX</span>() 最大</span><br><span class="line"><span class="built_in">MIN</span>() 最小</span><br><span class="line"><span class="built_in">SUM</span>() 求和</span><br><span class="line"><span class="comment">-- 聚集不同的值</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">AVG</span>(<span class="keyword">DISTINCT</span> prod_pric) <span class="keyword">as</span> avg_price</span><br><span class="line"><span class="keyword">from</span> products <span class="keyword">where</span> vend_id <span class="operator">=</span> <span class="number">1003</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="分组数据"><a href="#分组数据" class="headerlink" title="分组数据"></a>分组数据</h2><p>过滤分组使用 <em>HAVING</em></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- HAVING 过滤分组</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> orders </span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> cust_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span>;</span><br><span class="line"><span class="comment">-- 列出具有2个及以上、价格为10及以上的产品的供应商</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> num_prods</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price <span class="operator">&gt;=</span> <span class="number">10</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> vend_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;=</span> <span class="number">2</span>;</span><br><span class="line"><span class="comment">-- where 在数据分组前进行过滤</span></span><br><span class="line"><span class="comment">-- having 在数据分组后进行过滤</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><h2 id="联结表"><a href="#联结表" class="headerlink" title="联结表"></a>联结表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 没有联结条件的表关系 返回的结果为笛卡尔积 行数将为第一张表的行数*第二张表的行数</span></span><br><span class="line"><span class="comment">-- 内部联结</span></span><br><span class="line"><span class="comment">/* 用三种方法实现 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> cust_name, cust_contact</span><br><span class="line"><span class="keyword">from</span> customers</span><br><span class="line"><span class="keyword">where</span> cust_id <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> cust_id</span><br><span class="line">	<span class="keyword">from</span> orders</span><br><span class="line">	<span class="keyword">where</span> order_num <span class="keyword">in</span> (</span><br><span class="line">		<span class="keyword">select</span> order_num</span><br><span class="line">		<span class="keyword">from</span> orderitems</span><br><span class="line">		<span class="keyword">where</span> prod_id <span class="operator">=</span> <span class="string">&#x27;TNT2&#x27;</span></span><br><span class="line">		)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> c.cust_name, c.cust_contact</span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">AS</span> c, orders <span class="keyword">AS</span> o, orderitems <span class="keyword">AS</span> i</span><br><span class="line"><span class="keyword">WHERE</span> c.cust_id <span class="operator">=</span> o.cust_id</span><br><span class="line"><span class="keyword">AND</span> i.order_num <span class="operator">=</span> o.order_num</span><br><span class="line"><span class="keyword">AND</span> i.prod_id <span class="operator">=</span> <span class="string">&#x27;TNT2&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> c.cust_name, c.cust_contact</span><br><span class="line"><span class="keyword">from</span> customers <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> orders <span class="keyword">as</span> o <span class="keyword">on</span> c.cust_id <span class="operator">=</span> o.cust_id</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> orderitems <span class="keyword">as</span> i <span class="keyword">on</span> o.order_num <span class="operator">=</span> i.order_num</span><br><span class="line"><span class="keyword">where</span> i.prod_id <span class="operator">=</span> <span class="string">&#x27;TNT2&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 自联结</span></span><br><span class="line"><span class="keyword">select</span> p1.prod_id, p1.prod_name</span><br><span class="line"><span class="keyword">from</span> products <span class="keyword">as</span> p1, products <span class="keyword">as</span> p2</span><br><span class="line"><span class="keyword">where</span> p1.vend_id <span class="operator">=</span> p2.vend_id</span><br><span class="line"><span class="keyword">and</span> p2.prod_id <span class="operator">=</span> <span class="string">&#x27;DTNTR&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用带聚集函数的联结</span></span><br><span class="line"><span class="keyword">select</span> c.cust_id, c.cust_name, <span class="built_in">count</span>(o.order_num) <span class="keyword">as</span> num_ord</span><br><span class="line"><span class="keyword">from</span> customers <span class="keyword">as</span> c</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> orders <span class="keyword">as</span> o</span><br><span class="line"><span class="keyword">on</span> c.cust_id <span class="operator">=</span> o.cust_id</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> c.cust_id</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> num_ord;</span><br></pre></td></tr></table></figure>
+
+<h2 id="组合查询"><a href="#组合查询" class="headerlink" title="组合查询"></a>组合查询</h2><p><strong>UNION</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 默认取消重复的行</span></span><br><span class="line"><span class="comment">-- 若要包含 使用 union all</span></span><br><span class="line"><span class="comment">-- 对组合查询进行排序</span></span><br><span class="line"><span class="keyword">select</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">from</span> products</span><br><span class="line"><span class="keyword">where</span> prod_price <span class="operator">&lt;=</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">from</span> products</span><br><span class="line"><span class="keyword">where</span> vend_id <span class="keyword">in</span> (<span class="number">1001</span>,<span class="number">1002</span>)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> vend_id, prod_price;</span><br></pre></td></tr></table></figure>
+
+<h2 id="全文检索"><a href="#全文检索" class="headerlink" title="全文检索"></a>全文检索</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `productnotes` (</span><br><span class="line">  `note_id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `prod_id` <span class="type">char</span>(<span class="number">10</span>) <span class="keyword">COLLATE</span> utf8_bin <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `note_date` datetime <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `note_text` text <span class="keyword">COLLATE</span> utf8_bin,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`note_id`),</span><br><span class="line">  FULLTEXT KEY `note_text` (`note_text`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB AUTO_INCREMENT<span class="operator">=</span><span class="number">115</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8_bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h2><p>MySQL游标只能用于存储过程(和函数)<br>使用游标设计到的几个步骤: 声明游标 打开游标 检索数据 关闭游标</p>
+<h1 id="MySQL数据类型"><a href="#MySQL数据类型" class="headerlink" title="MySQL数据类型"></a>MySQL数据类型</h1><h2 id="串数据类型"><a href="#串数据类型" class="headerlink" title="串数据类型"></a>串数据类型</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">CHAR</td>
+<td align="center">1~255个字符的定长串</td>
+</tr>
+<tr>
+<td align="center">VARCHAR</td>
+<td align="center">长度可变 最多不超过255字节</td>
+</tr>
+<tr>
+<td align="center">ENUM</td>
+<td align="center">接受最多64K个串组成的一个预定义集合的某个串</td>
+</tr>
+<tr>
+<td align="center">SET</td>
+<td align="center">接受最多64K个串组成的一个预定义集合的零个或多个串</td>
+</tr>
+<tr>
+<td align="center">TEXT</td>
+<td align="center">最大长度为64K的长文本</td>
+</tr>
+<tr>
+<td align="center">MEDIUMTEXT</td>
+<td align="center">最大长度16K</td>
+</tr>
+<tr>
+<td align="center">TINYTEXT</td>
+<td align="center">最大长度255字节</td>
+</tr>
+<tr>
+<td align="center">LONGTEXT</td>
+<td align="center">最大长度4GB</td>
+</tr>
+</tbody></table>
+<h2 id="数值数据类型"><a href="#数值数据类型" class="headerlink" title="数值数据类型"></a>数值数据类型</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BIT</td>
+<td align="center">位字段，1～64位。</td>
+</tr>
+<tr>
+<td align="center">BIGINT</td>
+<td align="center">整数值，支持-9223372036854775808～9223372036854775807的数</td>
+</tr>
+<tr>
+<td align="center">BOOLEAN</td>
+<td align="center">（或BOOL） 布尔标志，或者为0或者为1，主要用于开/关（on/off）标志</td>
+</tr>
+<tr>
+<td align="center">DECIMAL</td>
+<td align="center">（或DEC） 精度可变的浮点值</td>
+</tr>
+<tr>
+<td align="center">DOUBLE</td>
+<td align="center">双精度浮点值</td>
+</tr>
+<tr>
+<td align="center">FLOAT</td>
+<td align="center">单精度浮点值</td>
+</tr>
+<tr>
+<td align="center">INT</td>
+<td align="center">（或INTEGER） 整数值，支持-2147483648～2147483647的数</td>
+</tr>
+<tr>
+<td align="center">MEDIUMINT</td>
+<td align="center">整数值，支持-8388608～8388607（如果是UNSIGNED，为0～ 16777215）的数</td>
+</tr>
+<tr>
+<td align="center">REAL</td>
+<td align="center">4字节的浮点值</td>
+</tr>
+<tr>
+<td align="center">SMALLINT</td>
+<td align="center">整数值，支持-32768～32767（如果是UNSIGNED，为0～ 65535）的数</td>
+</tr>
+<tr>
+<td align="center">TINYINT</td>
+<td align="center">整数值，支持-128～127（如果为UNSIGNED，为0～255）的数</td>
+</tr>
+</tbody></table>
+<h2 id="日期时间类型"><a href="#日期时间类型" class="headerlink" title="日期时间类型"></a>日期时间类型</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">DATE</td>
+<td align="center">表示1000-01-01～9999-12-31的日期，格式为 YYYY-MM-DD</td>
+</tr>
+<tr>
+<td align="center">DATETIME</td>
+<td align="center">DATE和TIME的组合 TIMESTAMP 功能和DATETIME相同（但范围较小）</td>
+</tr>
+<tr>
+<td align="center">TIME</td>
+<td align="center">格式为HH:MM:SS</td>
+</tr>
+<tr>
+<td align="center">YEAR</td>
+<td align="center">用2位数字表示，范围是70（1970年）～69（2069 年），用4位数字表示，范围是1901年～2155年 D</td>
+</tr>
+</tbody></table>
+<h2 id="二进制数据类型"><a href="#二进制数据类型" class="headerlink" title="二进制数据类型"></a>二进制数据类型</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BLOB</td>
+<td align="center">Blob最大长度为64 KB</td>
+</tr>
+<tr>
+<td align="center">MEDIUMBLOB</td>
+<td align="center">Blob最大长度为16 MB</td>
+</tr>
+<tr>
+<td align="center">LONGBLOB</td>
+<td align="center">Blob最大长度为4 GB</td>
+</tr>
+<tr>
+<td align="center">TINYBLOB</td>
+<td align="center">Blob最大长度为255字节</td>
+</tr>
+</tbody></table>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL-%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">MySQL 必知必会</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%99%BB%E5%BD%95mysql"><span class="toc-number">1.1.</span> <span class="toc-text">命令行登录mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E8%A1%A8"><span class="toc-number">1.2.</span> <span class="toc-text">了解数据库和表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">1.3.</span> <span class="toc-text">检索数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E6%A3%80%E7%B4%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">1.4.</span> <span class="toc-text">排序检索数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E6%95%B0%E6%8D%AE"><span class="toc-number">1.5.</span> <span class="toc-text">过滤数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%87%E6%BB%A4"><span class="toc-number">1.6.</span> <span class="toc-text">数据过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E9%80%9A%E9%85%8D%E7%AC%A6%E8%BF%9B%E8%A1%8C%E8%BF%87%E6%BB%A4"><span class="toc-number">1.7.</span> <span class="toc-text">用通配符进行过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E8%A1%8C%E6%90%9C%E7%B4%A0"><span class="toc-number">1.8.</span> <span class="toc-text">用正则表达式进行搜素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%AD%97%E6%AE%B5"><span class="toc-number">1.9.</span> <span class="toc-text">计算字段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.10.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%87%E6%80%BB%E6%95%B0%E6%8D%AE"><span class="toc-number">1.11.</span> <span class="toc-text">汇总数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E6%95%B0%E6%8D%AE"><span class="toc-number">1.12.</span> <span class="toc-text">分组数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.13.</span> <span class="toc-text">子查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%94%E7%BB%93%E8%A1%A8"><span class="toc-number">1.14.</span> <span class="toc-text">联结表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.15.</span> <span class="toc-text">组合查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2"><span class="toc-number">1.16.</span> <span class="toc-text">全文检索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B"><span class="toc-number">1.17.</span> <span class="toc-text">存储过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E6%A0%87"><span class="toc-number">1.18.</span> <span class="toc-text">游标</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MySQL%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">MySQL数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">串数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">数值数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">日期时间类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.4.</span> <span class="toc-text">二进制数据类型</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&text=SQL必知必会"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&is_video=false&description=SQL必知必会"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=SQL必知必会&body=Check out this article: https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&title=SQL必知必会"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&name=SQL必知必会&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/&t=SQL必知必会"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

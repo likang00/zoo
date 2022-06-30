@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="pymysql今天学习一下mysql，在python3中利用PyMySQL模块来操作。先安装包:pip install PyMySQL  1.语法速览123456789101112131、语法格式    对象名 &#x3D; pymysql.connect(&quot;主机地址&quot;,&quot;用户名&quot;,&quot;密码&quot;,&quot;库名&quot;,&quot;端口号&amp;quo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-pymysql">
+<meta property="og:url" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="pymysql今天学习一下mysql，在python3中利用PyMySQL模块来操作。先安装包:pip install PyMySQL  1.语法速览123456789101112131、语法格式    对象名 &#x3D; pymysql.connect(&quot;主机地址&quot;,&quot;用户名&quot;,&quot;密码&quot;,&quot;库名&quot;,&quot;端口号&amp;quo">
+<meta property="og:locale">
+<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_INNER_JOIN.png">
+<meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/spacescp/1383720/o_INNER_JOIN.png">
+<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_LEFT_OUTER_JOIN.png">
+<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_RIGHT_OUTER_JOIN.png">
+<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_FULL_OUTER_JOIN.png">
+<meta property="article:published_time" content="2019-02-28T15:01:21.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:16.842Z">
+<meta property="article:author" content="Likang">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_INNER_JOIN.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python-pymysql</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&text=Python-pymysql"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&is_video=false&description=Python-pymysql"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python-pymysql&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&name=Python-pymysql&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&t=Python-pymysql"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#pymysql"><span class="toc-number">1.</span> <span class="toc-text">pymysql</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%AD%E6%B3%95%E9%80%9F%E8%A7%88"><span class="toc-number"></span> <span class="toc-text">1.语法速览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%8B%E9%9D%A2%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%93%8D%E4%BD%9C"><span class="toc-number"></span> <span class="toc-text">2.下面记录一下操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5-%E8%85%BE%E8%AE%AF%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93-mysql5-7"><span class="toc-number">1.</span> <span class="toc-text">建立连接(腾讯云数据库[mysql5.7])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">数据库版本信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E8%A1%A8%EF%BC%8C%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-number">3.</span> <span class="toc-text">建表，插入数据</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#test1"><span class="toc-number">3.0.1.</span> <span class="toc-text">test1</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#test2"><span class="toc-number">3.0.2.</span> <span class="toc-text">test2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.</span> <span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A8%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.1.</span> <span class="toc-text">全表查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">5.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%B0%E5%BE%97%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.</span> <span class="toc-text">记得关闭数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BF%AB%E9%80%9F%E6%89%A7%E8%A1%8CSQL%E8%AF%AD%E5%8F%A5"><span class="toc-number"></span> <span class="toc-text">3.快速执行SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E8%BF%90%E8%A1%8CSQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">快速运行SQL语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">SQL语句</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E8%AF%A2"><span class="toc-number"></span> <span class="toc-text">4.查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.</span> <span class="toc-text">分页查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">聚合查询</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">其他聚合函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="toc-number">2.2.</span> <span class="toc-text">分组聚合</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.</span> <span class="toc-text">多表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#test1-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">test1</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#test2-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">test2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.</span> <span class="toc-text">连接查询</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E3%80%82%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E5%AF%B9%E5%A4%9A%E4%B8%AA%E8%A1%A8%E8%BF%9B%E8%A1%8CJOIN%E8%BF%90%E7%AE%97%EF%BC%8C%E7%AE%80%E5%8D%95%E5%9C%B0%E8%AF%B4%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%85%88%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%B8%BB%E8%A1%A8%E4%BD%9C%E4%B8%BA%E7%BB%93%E6%9E%9C%E9%9B%86%EF%BC%8C%E7%84%B6%E5%90%8E%EF%BC%8C%E6%8A%8A%E5%85%B6%E4%BB%96%E8%A1%A8%E7%9A%84%E8%A1%8C%E6%9C%89%E9%80%89%E6%8B%A9%E6%80%A7%E5%9C%B0%E2%80%9C%E8%BF%9E%E6%8E%A5%E2%80%9D%E5%9C%A8%E4%B8%BB%E8%A1%A8%E7%BB%93%E6%9E%9C%E9%9B%86%E4%B8%8A%E3%80%82"><span class="toc-number">4.0.1.</span> <span class="toc-text">连接查询是另一种类型的多表查询。连接查询对多个表进行JOIN运算，简单地说，就是先确定一个主表作为结果集，然后，把其他表的行有选择性地“连接”在主表结果集上。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link"><span class="toc-number">4.0.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E8%BF%9E%E6%8E%A5%E8%AF%AD%E5%8F%A5"><span class="toc-number">4.0.3.</span> <span class="toc-text">各种连接语句</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%AA%E8%BF%94%E5%9B%9E%E5%90%8C%E6%97%B6%E5%AD%98%E5%9C%A8%E4%BA%8E%E4%B8%A4%E5%BC%A0%E8%A1%A8%E7%9A%84%E8%A1%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">4.0.4.</span> <span class="toc-text">只返回同时存在于两张表的行数据</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%B7%A6%E8%A1%A8%E9%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A1%8C"><span class="toc-number">4.0.5.</span> <span class="toc-text">返回左表都存在的行</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%8F%B3%E8%A1%A8%E9%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A1%8C"><span class="toc-number">4.0.6.</span> <span class="toc-text">返回右表都存在的行</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%A4%E5%BC%A0%E8%A1%A8%E7%9A%84%E6%89%80%E6%9C%89%E8%AE%B0%E5%BD%95%E5%85%A8%E9%83%A8%E9%80%89%E6%8B%A9%E5%87%BA%E6%9D%A5"><span class="toc-number">4.0.7.</span> <span class="toc-text">两张表的所有记录全部选择出来</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">5.</span> <span class="toc-text">-补充-</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#JOIN%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.1.</span> <span class="toc-text">JOIN查询</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">5.2.</span> <span class="toc-text">条件表达式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-number"></span> <span class="toc-text">5.修改数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#INSERT"><span class="toc-number">1.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UPDATE"><span class="toc-number">2.</span> <span class="toc-text">UPDATE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DELETE"><span class="toc-number">3.</span> <span class="toc-text">DELETE</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python-pymysql
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-02-28T15:01:21.000Z" itemprop="datePublished">2019-02-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h4 id="pymysql"><a href="#pymysql" class="headerlink" title="pymysql"></a>pymysql</h4><p>今天学习一下mysql，在python3中利用PyMySQL模块来操作。<br>先安装包:<code>pip install PyMySQL</code></p>
+<hr>
+<h2 id="1-语法速览"><a href="#1-语法速览" class="headerlink" title="1.语法速览"></a>1.语法速览</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、语法格式</span><br><span class="line">    对象名 <span class="operator">=</span> pymysql.connect(&quot;主机地址&quot;,&quot;用户名&quot;,&quot;密码&quot;,&quot;库名&quot;,&quot;端口号&quot;)</span><br><span class="line"><span class="number">2</span>、<span class="keyword">connect</span>连接对象支持的方法</span><br><span class="line">    <span class="number">1</span>、<span class="keyword">cursor</span>() 创建一个游标对象db.cursor()</span><br><span class="line">    <span class="number">2</span>、<span class="keyword">commit</span>() 提交到数据库执行(表记录增删改)</span><br><span class="line">    <span class="number">3</span>、<span class="keyword">rollback</span>() 回滚</span><br><span class="line">    <span class="number">4</span>、<span class="keyword">close</span>() 关闭数据库连接</span><br><span class="line"><span class="number">3</span>、游标对象支持的方法</span><br><span class="line">    <span class="number">1</span>、<span class="keyword">execute</span>(&quot;SQL命令&quot;) 执行<span class="keyword">SQL</span>命令</span><br><span class="line">    <span class="number">2</span>、fetchone() 取得结果集的第一条记录</span><br><span class="line">    <span class="number">3</span>、fetchmany(n) 取得结果集的 n 条记录</span><br><span class="line">    <span class="number">4</span>、fetchall() 取得结果集的所有记录</span><br><span class="line">    <span class="number">5</span>、<span class="keyword">close</span>() 关闭游标对象</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-下面记录一下操作"><a href="#2-下面记录一下操作" class="headerlink" title="2.下面记录一下操作"></a>2.下面记录一下操作</h2><h4 id="建立连接-腾讯云数据库-mysql5-7"><a href="#建立连接-腾讯云数据库-mysql5-7" class="headerlink" title="建立连接(腾讯云数据库[mysql5.7])"></a>建立连接(腾讯云数据库[mysql5.7])</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="comment"># 建立连接</span></span><br><span class="line"><span class="comment"># db = pymysql.connect(host=, user=, password=, database=, port=)</span></span><br><span class="line">db = pymysql.connect(<span class="string">&quot;xxxxx.com&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;mysq1112&quot;</span>, <span class="string">&quot;MyDB&quot;</span>, xxxxx)</span><br><span class="line"><span class="comment"># 创建游标对象</span></span><br><span class="line">cur = db.cursor()</span><br></pre></td></tr></table></figure>
+
+<h4 id="数据库版本信息"><a href="#数据库版本信息" class="headerlink" title="数据库版本信息"></a>数据库版本信息</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;SELECT VERSION()&#x27;</span>)</span><br><span class="line">data = cur.fetchone()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;Database version :<span class="subst">&#123;data&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="建表，插入数据"><a href="#建表，插入数据" class="headerlink" title="建表，插入数据"></a>建表，插入数据</h4><h6 id="test1"><a href="#test1" class="headerlink" title="test1"></a>test1</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># creat table test</span></span><br><span class="line">sql_create =<span class="string">&#x27;create table test(id INT(8) , name VARCHAR(20) , age INT(3) , value INT(3) )&#x27;</span></span><br><span class="line">cur.execute(sql_create)</span><br><span class="line">cur.connection.commit()</span><br><span class="line"><span class="comment"># insert table test</span></span><br><span class="line">sql_insert = <span class="string">&#x27;INSERT INTO test(id, name, age, value) VALUES (10002, &quot;docker&quot;, 15, 87)&#x27;</span></span><br><span class="line">cur.execute(sql_insert)</span><br><span class="line">cur.connection.commit()</span><br></pre></td></tr></table></figure>
+
+<h6 id="test2"><a href="#test2" class="headerlink" title="test2"></a>test2</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create table students</span></span><br><span class="line">sql_create = <span class="string">&#x27;&#x27;&#x27;CREATE TABLE students(</span></span><br><span class="line"><span class="string">`id` bigint(20) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">`class_id` bigint(20) NOT NULL,</span></span><br><span class="line"><span class="string">`name` varchar(100) NOT NULL,</span></span><br><span class="line"><span class="string">`gender` varchar(1) NOT NULL,</span></span><br><span class="line"><span class="string">`score` int(11) NOT NULL,</span></span><br><span class="line"><span class="string">PRIMARY KEY (`id`)</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">cur.execute(sql_create)</span><br><span class="line"><span class="comment"># insert table students </span></span><br><span class="line"><span class="built_in">list</span> = [(<span class="number">1</span>,<span class="number">1</span>,<span class="string">&#x27;小明&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">90</span>),</span><br><span class="line">        (<span class="number">2</span>,<span class="number">1</span>,<span class="string">&#x27;小红&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">95</span>),</span><br><span class="line">        (<span class="number">3</span>,<span class="number">1</span>,<span class="string">&#x27;小军&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">88</span>),</span><br><span class="line">        (<span class="number">4</span>,<span class="number">1</span>,<span class="string">&#x27;小米&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">73</span>),</span><br><span class="line">        (<span class="number">5</span>,<span class="number">2</span>,<span class="string">&#x27;小白&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">81</span>),</span><br><span class="line">        (<span class="number">6</span>,<span class="number">2</span>,<span class="string">&#x27;小兵&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">55</span>),</span><br><span class="line">        (<span class="number">7</span>,<span class="number">2</span>,<span class="string">&#x27;小林&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">85</span>),</span><br><span class="line">        (<span class="number">8</span>,<span class="number">3</span>,<span class="string">&#x27;小新&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">91</span>),</span><br><span class="line">        (<span class="number">9</span>,<span class="number">3</span>,<span class="string">&#x27;小王&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="number">89</span>),</span><br><span class="line">        (<span class="number">10</span>,<span class="number">3</span>,<span class="string">&#x27;小丽&#x27;</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">88</span>)]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">    sql_inserts = <span class="string">f&#x27;INSERT INTO students(id, class_id, name, gender, score) VALUES <span class="subst">&#123;i&#125;</span>&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(sql_inserts)</span><br><span class="line">    cur.execute(sql_inserts)</span><br><span class="line">    cur.connection.commit()</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><h5 id="全表查询"><a href="#全表查询" class="headerlink" title="全表查询"></a>全表查询</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sql_select = <span class="string">&#x27;&#x27;&#x27;select * from Writers&#x27;&#x27;&#x27;</span></span><br><span class="line">cur.execute(sql_select)</span><br><span class="line">result = cur.fetchall()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;select * from:<span class="subst">&#123;result&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;drop database &lt;database_name&gt;&#x27;</span>)</span><br><span class="line">cur.execute(<span class="string">&#x27;drop table &lt;table_name&gt;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="记得关闭数据库"><a href="#记得关闭数据库" class="headerlink" title="记得关闭数据库"></a>记得关闭数据库</h4><p><code>db.close()</code></p>
+<hr>
+<h2 id="3-快速执行SQL语句"><a href="#3-快速执行SQL语句" class="headerlink" title="3.快速执行SQL语句"></a>3.快速执行SQL语句</h2><h4 id="快速运行SQL语句"><a href="#快速运行SQL语句" class="headerlink" title="快速运行SQL语句"></a>快速运行SQL语句</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;SQL语句&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cur.fetchall())</span><br></pre></td></tr></table></figure>
+
+<h4 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 按AND条件查询students</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> score <span class="operator">&gt;=</span> <span class="number">80</span> <span class="keyword">AND</span> gender <span class="operator">=</span> <span class="string">&#x27;M&#x27;</span></span><br><span class="line"><span class="comment">-- 按OR条件查询students</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> score <span class="operator">&gt;=</span> <span class="number">80</span> <span class="keyword">OR</span> gender <span class="operator">=</span> <span class="string">&#x27;M&#x27;</span></span><br><span class="line"><span class="comment">-- 按NOT条件查询students</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> <span class="keyword">NOT</span> class_id <span class="operator">=</span> <span class="number">2</span></span><br><span class="line"><span class="comment">-- 按多个条件查询students</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> (score <span class="operator">&lt;</span> <span class="number">80</span> <span class="keyword">OR</span> score <span class="operator">&gt;</span> <span class="number">90</span>) <span class="keyword">AND</span> gender <span class="operator">=</span> <span class="string">&#x27;M&#x27;</span></span><br><span class="line"><span class="comment">-- 排序test</span></span><br><span class="line"><span class="keyword">SELECT</span> id, name, gender, score <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> id;</span><br><span class="line"><span class="comment">-- desc 倒序</span></span><br><span class="line"><span class="keyword">SELECT</span> id, name, gender, score <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> id <span class="keyword">DESC</span>;</span><br><span class="line"><span class="comment">-- ASC升序 DESC降序</span></span><br><span class="line"><span class="keyword">SELECT</span> id, name, gender, score <span class="keyword">FROM</span> students <span class="keyword">ORDER</span> <span class="keyword">BY</span> gender, score;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="4-查询"><a href="#4-查询" class="headerlink" title="4.查询"></a>4.查询</h2><h4 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fun1</span>(<span class="params">pageSize, pageIndex</span>):</span><br><span class="line">    limit = pageSize</span><br><span class="line">    offset = pageSize * (pageIndex - <span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;limit:<span class="subst">&#123;limit&#125;</span>,offset:<span class="subst">&#123;offset&#125;</span>&#x27;</span>)</span><br><span class="line">    cur.execute(<span class="string">f&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    SELECT id, name, gender, score FROM students ORDER BY id LIMIT <span class="subst">&#123;limit&#125;</span> OFFSET <span class="subst">&#123;offset&#125;</span></span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(cur.fetchall())</span><br><span class="line">fun1(<span class="number">3</span>,<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">SELECT COUNT(*) boys FROM students WHERE gender = &#x27;M&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cur.fetchall())</span><br></pre></td></tr></table></figure>
+
+<h5 id="其他聚合函数"><a href="#其他聚合函数" class="headerlink" title="其他聚合函数"></a>其他聚合函数</h5><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SUM</td>
+<td>计算某一列的合计值，该列必须为数值类型</td>
+</tr>
+<tr>
+<td>AVG</td>
+<td>计算某一列的平均值，该列必须为数值类型</td>
+</tr>
+<tr>
+<td>MAX</td>
+<td>计算某一列的最大值</td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>计算某一列的最小值</td>
+</tr>
+</tbody></table>
+<h5 id="分组聚合"><a href="#分组聚合" class="headerlink" title="分组聚合"></a>分组聚合</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">SELECT COUNT(*) boys FROM students GROUP BY class_id</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cur.fetchall())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight py"><figcaption><span>&#123;.line-numbers&#125;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">SELECT class_id, gender, COUNT(*) num FROM students GROUP BY class_id, gender;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cur.fetchall())</span><br></pre></td></tr></table></figure>
+
+<h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><h6 id="test1-1"><a href="#test1-1" class="headerlink" title="test1"></a>test1</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">SELECT * FROM students, classes;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h6 id="test2-1"><a href="#test2-1" class="headerlink" title="test2"></a>test2</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cur.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">SELECT</span></span><br><span class="line"><span class="string">    s.id sid,</span></span><br><span class="line"><span class="string">    s.name,</span></span><br><span class="line"><span class="string">    s.gender,</span></span><br><span class="line"><span class="string">    s.score,</span></span><br><span class="line"><span class="string">    c.id cid,</span></span><br><span class="line"><span class="string">    c.name cnameo</span></span><br><span class="line"><span class="string">FROM students s, classes c</span></span><br><span class="line"><span class="string">WHERE s.gender = &#x27;M&#x27; AND c.id = 1;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h4><h6 id="连接查询是另一种类型的多表查询。连接查询对多个表进行JOIN运算，简单地说，就是先确定一个主表作为结果集，然后，把其他表的行有选择性地“连接”在主表结果集上。"><a href="#连接查询是另一种类型的多表查询。连接查询对多个表进行JOIN运算，简单地说，就是先确定一个主表作为结果集，然后，把其他表的行有选择性地“连接”在主表结果集上。" class="headerlink" title="连接查询是另一种类型的多表查询。连接查询对多个表进行JOIN运算，简单地说，就是先确定一个主表作为结果集，然后，把其他表的行有选择性地“连接”在主表结果集上。"></a>连接查询是另一种类型的多表查询。连接查询对多个表进行JOIN运算，简单地说，就是先确定一个主表作为结果集，然后，把其他表的行有选择性地“连接”在主表结果集上。</h6><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接查询</span></span><br><span class="line">cur.execute(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">SELECT s.id, s.name, s.class_id, c.name class_name, s.gender, s.score</span></span><br><span class="line"><span class="string">FROM students s</span></span><br><span class="line"><span class="string">INNER JOIN classes c</span></span><br><span class="line"><span class="string">ON s.class_id = c.id</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(cur.fetchall())</span><br></pre></td></tr></table></figure>
+
+<h6 id><a href="#" class="headerlink" title></a></h6><pre><code>1.先确定主表，仍然使用FROM &lt;表1&gt;的语法；
+2.再确定需要连接的表，使用INNER JOIN &lt;表2&gt;的语法；
+3.然后确定连接条件，使用ON &lt;条件...&gt;，这里的条件是s.class_id = c.id，表示students表的class_id列与classes表的id列相同的行需要连接；
+4.可选：加上WHERE子句、ORDER BY等子句。
+</code></pre>
+<h6 id="各种连接语句"><a href="#各种连接语句" class="headerlink" title="各种连接语句"></a>各种连接语句</h6><p><code>SELECT ... FROM tableA ??? JOIN tableB ON tableA.column1 = tableB.column2;</code></p>
+<p>1.INNER JOIN</p>
+<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_INNER_JOIN.png"></p>
+<!-- <p align="center">
+    <img src="https://images.cnblogs.com/cnblogs_com/spacescp/1383720/o_INNER_JOIN.png" alt="Sample"  width="100" height="50">
+    <p align="center">
+        <em>图片示例2</em>
+    </p>
+</p> -->
+
+<h6 id="只返回同时存在于两张表的行数据"><a href="#只返回同时存在于两张表的行数据" class="headerlink" title="只返回同时存在于两张表的行数据"></a>只返回同时存在于两张表的行数据</h6><p>2.LEFT OUTER JOIN</p>
+<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_LEFT_OUTER_JOIN.png"></p>
+<h6 id="返回左表都存在的行"><a href="#返回左表都存在的行" class="headerlink" title="返回左表都存在的行"></a>返回左表都存在的行</h6><p>3.RIGHT OUTER JOIN</p>
+<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_RIGHT_OUTER_JOIN.png"></p>
+<h6 id="返回右表都存在的行"><a href="#返回右表都存在的行" class="headerlink" title="返回右表都存在的行"></a>返回右表都存在的行</h6><p>4.FULL OUTER JOIN</p>
+<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_FULL_OUTER_JOIN.png"></p>
+<h6 id="两张表的所有记录全部选择出来"><a href="#两张表的所有记录全部选择出来" class="headerlink" title="两张表的所有记录全部选择出来"></a>两张表的所有记录全部选择出来</h6><h4 id="补充"><a href="#补充" class="headerlink" title="-补充-"></a>-补充-</h4><h5 id="JOIN查询"><a href="#JOIN查询" class="headerlink" title="JOIN查询"></a>JOIN查询</h5><p>JOIN查询需要先确定主表，然后把另一个表的数据“附加”到结果集上；<br>INNER JOIN是最常用的一种JOIN查询，它的语法是SELECT … FROM &lt;表1&gt; INNER JOIN &lt;表2&gt; ON &lt;条件…&gt;；<br>JOIN查询仍然可以使用WHERE条件和ORDER BY排序。</p>
+<h5 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h5><table>
+<thead>
+<tr>
+<th>条件</th>
+<th>表达式举例1</th>
+<th>表达式举例2</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>使用=判断相等</td>
+<td>score = 80</td>
+<td>name = ‘abc’</td>
+<td>字符串需要用单引号括起来</td>
+</tr>
+<tr>
+<td>使用&gt;判断大于</td>
+<td>score &gt; 80</td>
+<td>name &gt; ‘abc’</td>
+<td>字符串比较根据ASCII码，中文字符比较根据数据库设置</td>
+</tr>
+<tr>
+<td>使用&gt;=判断大于或相等</td>
+<td>score &gt;= 80</td>
+<td>name &gt;= ‘abc’</td>
+<td></td>
+</tr>
+<tr>
+<td>使用&lt;判断小于</td>
+<td>score &lt; 80</td>
+<td>name &lt;= ‘abc’</td>
+<td></td>
+</tr>
+<tr>
+<td>使用&lt;=判断小于或相等</td>
+<td>score &lt;= 80</td>
+<td>name &lt;= ‘abc’</td>
+<td></td>
+</tr>
+<tr>
+<td>使用&lt;&gt;判断不相等</td>
+<td>score &lt;&gt; 80</td>
+<td>name &lt;&gt; ‘abc’</td>
+<td></td>
+</tr>
+<tr>
+<td>使用LIKE判断相似</td>
+<td>name LIKE ‘ab%’</td>
+<td>name LIKE ‘%bc%’</td>
+<td>%表示任意字符，例如’ab%’将匹配’ab’，’abc’，’abcd’</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="5-修改数据"><a href="#5-修改数据" class="headerlink" title="5.修改数据"></a>5.修改数据</h2><h4 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h4><h4 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h4><h4 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h4><p><em>—等待更新—</em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#pymysql"><span class="toc-number">1.</span> <span class="toc-text">pymysql</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%AD%E6%B3%95%E9%80%9F%E8%A7%88"><span class="toc-number"></span> <span class="toc-text">1.语法速览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%B8%8B%E9%9D%A2%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B%E6%93%8D%E4%BD%9C"><span class="toc-number"></span> <span class="toc-text">2.下面记录一下操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5-%E8%85%BE%E8%AE%AF%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93-mysql5-7"><span class="toc-number">1.</span> <span class="toc-text">建立连接(腾讯云数据库[mysql5.7])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">数据库版本信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%BA%E8%A1%A8%EF%BC%8C%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-number">3.</span> <span class="toc-text">建表，插入数据</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#test1"><span class="toc-number">3.0.1.</span> <span class="toc-text">test1</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#test2"><span class="toc-number">3.0.2.</span> <span class="toc-text">test2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.</span> <span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A8%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.1.</span> <span class="toc-text">全表查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4"><span class="toc-number">5.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%B0%E5%BE%97%E5%85%B3%E9%97%AD%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.</span> <span class="toc-text">记得关闭数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%BF%AB%E9%80%9F%E6%89%A7%E8%A1%8CSQL%E8%AF%AD%E5%8F%A5"><span class="toc-number"></span> <span class="toc-text">3.快速执行SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E8%BF%90%E8%A1%8CSQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">1.</span> <span class="toc-text">快速运行SQL语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.</span> <span class="toc-text">SQL语句</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%9F%A5%E8%AF%A2"><span class="toc-number"></span> <span class="toc-text">4.查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.</span> <span class="toc-text">分页查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E5%90%88%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">聚合查询</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="toc-number">2.1.</span> <span class="toc-text">其他聚合函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="toc-number">2.2.</span> <span class="toc-text">分组聚合</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">3.</span> <span class="toc-text">多表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#test1-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">test1</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#test2-1"><span class="toc-number">3.0.2.</span> <span class="toc-text">test2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">4.</span> <span class="toc-text">连接查询</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E6%98%AF%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E3%80%82%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E5%AF%B9%E5%A4%9A%E4%B8%AA%E8%A1%A8%E8%BF%9B%E8%A1%8CJOIN%E8%BF%90%E7%AE%97%EF%BC%8C%E7%AE%80%E5%8D%95%E5%9C%B0%E8%AF%B4%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%85%88%E7%A1%AE%E5%AE%9A%E4%B8%80%E4%B8%AA%E4%B8%BB%E8%A1%A8%E4%BD%9C%E4%B8%BA%E7%BB%93%E6%9E%9C%E9%9B%86%EF%BC%8C%E7%84%B6%E5%90%8E%EF%BC%8C%E6%8A%8A%E5%85%B6%E4%BB%96%E8%A1%A8%E7%9A%84%E8%A1%8C%E6%9C%89%E9%80%89%E6%8B%A9%E6%80%A7%E5%9C%B0%E2%80%9C%E8%BF%9E%E6%8E%A5%E2%80%9D%E5%9C%A8%E4%B8%BB%E8%A1%A8%E7%BB%93%E6%9E%9C%E9%9B%86%E4%B8%8A%E3%80%82"><span class="toc-number">4.0.1.</span> <span class="toc-text">连接查询是另一种类型的多表查询。连接查询对多个表进行JOIN运算，简单地说，就是先确定一个主表作为结果集，然后，把其他表的行有选择性地“连接”在主表结果集上。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link"><span class="toc-number">4.0.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E8%BF%9E%E6%8E%A5%E8%AF%AD%E5%8F%A5"><span class="toc-number">4.0.3.</span> <span class="toc-text">各种连接语句</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%AA%E8%BF%94%E5%9B%9E%E5%90%8C%E6%97%B6%E5%AD%98%E5%9C%A8%E4%BA%8E%E4%B8%A4%E5%BC%A0%E8%A1%A8%E7%9A%84%E8%A1%8C%E6%95%B0%E6%8D%AE"><span class="toc-number">4.0.4.</span> <span class="toc-text">只返回同时存在于两张表的行数据</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%B7%A6%E8%A1%A8%E9%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A1%8C"><span class="toc-number">4.0.5.</span> <span class="toc-text">返回左表都存在的行</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%8F%B3%E8%A1%A8%E9%83%BD%E5%AD%98%E5%9C%A8%E7%9A%84%E8%A1%8C"><span class="toc-number">4.0.6.</span> <span class="toc-text">返回右表都存在的行</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%A4%E5%BC%A0%E8%A1%A8%E7%9A%84%E6%89%80%E6%9C%89%E8%AE%B0%E5%BD%95%E5%85%A8%E9%83%A8%E9%80%89%E6%8B%A9%E5%87%BA%E6%9D%A5"><span class="toc-number">4.0.7.</span> <span class="toc-text">两张表的所有记录全部选择出来</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">5.</span> <span class="toc-text">-补充-</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#JOIN%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.1.</span> <span class="toc-text">JOIN查询</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">5.2.</span> <span class="toc-text">条件表达式</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-number"></span> <span class="toc-text">5.修改数据</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#INSERT"><span class="toc-number">1.</span> <span class="toc-text">INSERT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#UPDATE"><span class="toc-number">2.</span> <span class="toc-text">UPDATE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DELETE"><span class="toc-number">3.</span> <span class="toc-text">DELETE</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&text=Python-pymysql"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&is_video=false&description=Python-pymysql"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python-pymysql&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&name=Python-pymysql&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&t=Python-pymysql"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

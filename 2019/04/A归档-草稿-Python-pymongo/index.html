@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-pymongo">
+<meta property="og:url" content="https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-04-01T15:27:30.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:16.839Z">
+<meta property="article:author" content="Likang">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Python-pymongo</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/07/A%E5%BD%92%E6%A1%A3-SQL-SQL%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&text=Python-pymongo"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&is_video=false&description=Python-pymongo"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python-pymongo&body=Check out this article: https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&name=Python-pymongo&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&t=Python-pymongo"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python-pymongo
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-04-01T15:27:30.000Z" itemprop="datePublished">2019-04-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">MongoDB存储</span></span><br><span class="line"><span class="string">    在这里我们来看一下Python3下MongoDB的存储操作，在本节开始之前请确保你已经安装好了MongoDB并启动了其服务，另外安装好了Python</span></span><br><span class="line"><span class="string">    的PyMongo库。</span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">连接MongoDB</span></span><br><span class="line"><span class="string">    连接MongoDB我们需要使用PyMongo库里面的MongoClient，一般来说传入MongoDB的IP及端口即可，第一个参数为地址host，</span></span><br><span class="line"><span class="string">    第二个参数为端口port，端口如果不传默认是27017。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">import</span> pymongo</span><br><span class="line">client = pymongo.MongoClient(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">27017</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这样我们就可以创建一个MongoDB的连接对象了。另外MongoClient的第一个参数host还可以直接传MongoDB的连接字符串，以mongodb开头，</span></span><br><span class="line"><span class="string">例如：client = MongoClient(&#x27;mongodb://localhost:27017/&#x27;)可以达到同样的连接效果。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 指定数据库</span></span><br><span class="line"><span class="comment"># MongoDB中还分为一个个数据库，我们接下来的一步就是指定要操作哪个数据库，在这里我以test数据库为例进行说明，所以下一步我们</span></span><br><span class="line"><span class="comment"># 需要在程序中指定要使用的数据库。</span></span><br><span class="line"> </span><br><span class="line">db = client.test</span><br><span class="line"><span class="comment"># 调用client的test属性即可返回test数据库，当然也可以这样来指定：</span></span><br><span class="line"><span class="comment"># db = client[&#x27;test&#x27;]</span></span><br><span class="line"><span class="comment">#　两种方式是等价的。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 指定集合</span></span><br><span class="line"><span class="comment"># MongoDB的每个数据库又包含了许多集合Collection，也就类似与关系型数据库中的表，下一步我们需要指定要操作的集合，</span></span><br><span class="line"><span class="comment"># 在这里我们指定一个集合名称为students，学生集合。还是和指定数据库类似，指定集合也有两种方式。</span></span><br><span class="line"> </span><br><span class="line">collection = db.students</span><br><span class="line"><span class="comment"># collection = db[&#x27;students&#x27;]</span></span><br><span class="line"><span class="comment"># 插入数据,接下来我们便可以进行数据插入了，对于students这个Collection，我们新建一条学生数据，以字典的形式表示：</span></span><br><span class="line"> </span><br><span class="line">student = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;20170101&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Jordan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 在这里我们指定了学生的学号、姓名、年龄和性别，然后接下来直接调用collection的insert()方法即可插入数据。</span></span><br><span class="line"> </span><br><span class="line">result = collection.insert(student)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 在MongoDB中，每条数据其实都有一个_id属性来唯一标识，如果没有显式指明_id，MongoDB会自动产生一个ObjectId类型的_id属性。</span></span><br><span class="line"><span class="comment"># insert()方法会在执行后返回的_id值。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment"># 5932a68615c2606814c91f3d</span></span><br><span class="line"><span class="comment"># 当然我们也可以同时插入多条数据，只需要以列表形式传递即可，示例如下：</span></span><br><span class="line"> </span><br><span class="line">student1 = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;20170101&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Jordan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">student2 = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;20170202&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">21</span>,</span><br><span class="line">    <span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">result = collection.insert([student1, student2])</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 返回的结果是对应的_id的集合，运行结果：</span></span><br><span class="line"><span class="comment"># [ObjectId(&#x27;5932a80115c2606a59e8a048&#x27;), ObjectId(&#x27;5932a80115c2606a59e8a049&#x27;)]</span></span><br><span class="line"><span class="comment"># 实际上在PyMongo 3.X版本中，insert()方法官方已经不推荐使用了，当然继续使用也没有什么问题，</span></span><br><span class="line"><span class="comment"># 官方推荐使用insert_one()和insert_many()方法将插入单条和多条记录分开。</span></span><br><span class="line"> </span><br><span class="line">student = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;20170101&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Jordan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">result = collection.insert_one(student)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.inserted_id)</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment"># &lt;pymongo.results.InsertOneResult object at 0x10d68b558&gt;</span></span><br><span class="line"><span class="comment"># 5932ab0f15c2606f0c1cf6c5</span></span><br><span class="line"><span class="comment"># 返回结果和insert()方法不同，这次返回的是InsertOneResult对象，我们可以调用其inserted_id属性获取_id。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 对于insert_many()方法，我们可以将数据以列表形式传递即可，示例如下：</span></span><br><span class="line"> </span><br><span class="line">student1 = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;20170101&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Jordan&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>,</span><br><span class="line">    <span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">student2 = &#123;</span><br><span class="line">    <span class="string">&#x27;id&#x27;</span>: <span class="string">&#x27;20170202&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;age&#x27;</span>: <span class="number">21</span>,</span><br><span class="line">    <span class="string">&#x27;gender&#x27;</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">result = collection.insert_many([student1, student2])</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.inserted_ids)</span><br><span class="line"><span class="comment"># insert_many()方法返回的类型是InsertManyResult，调用inserted_ids属性可以获取插入数据的_id列表，运行结果：</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># &lt;pymongo.results.InsertManyResult object at 0x101dea558&gt;</span></span><br><span class="line"><span class="comment"># [ObjectId(&#x27;5932abf415c2607083d3b2ac&#x27;), ObjectId(&#x27;5932abf415c2607083d3b2ad&#x27;)]</span></span><br><span class="line"><span class="comment"># 查询，插入数据后我们可以利用find_one()或find()方法进行查询，find_one()查询得到是单个结果，find()则返回多个结果。</span></span><br><span class="line"> </span><br><span class="line">result = collection.find_one(&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Mike&#x27;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(result))</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 在这里我们查询name为Mike的数据，它的返回结果是字典类型，运行结果：</span></span><br><span class="line"><span class="comment"># &lt;class&#x27;dict&#x27;&gt;</span></span><br><span class="line"><span class="comment"># &#123;&#x27;_id&#x27;: ObjectId(&#x27;5932a80115c2606a59e8a049&#x27;), &#x27;id&#x27;: &#x27;20170202&#x27;, &#x27;name&#x27;: &#x27;Mike&#x27;, &#x27;age&#x27;: 21, &#x27;gender&#x27;: &#x27;male&#x27;&#125;</span></span><br><span class="line"><span class="comment"># 可以发现它多了一个_id属性，这就是MongoDB在插入的过程中自动添加的。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 我们也可以直接根据ObjectId来查询，这里需要使用bson库里面的ObjectId。</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">from</span> bson.objectid <span class="keyword">import</span> ObjectId</span><br><span class="line"> </span><br><span class="line">result = collection.find_one(&#123;<span class="string">&#x27;_id&#x27;</span>: ObjectId(<span class="string">&#x27;593278c115c2602667ec6bae&#x27;</span>)&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 其查询结果依然是字典类型，运行结果：</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># &#123;&#x27; ObjectId(&#x27;593278c115c2602667ec6bae&#x27;), &#x27;id&#x27;: &#x27;20170101&#x27;, &#x27;name&#x27;: &#x27;Jordan&#x27;, &#x27;age&#x27;: 20, &#x27;gender&#x27;: &#x27;male&#x27;&#125;</span></span><br><span class="line"><span class="comment"># 当然如果查询_id&#x27;:结果不存在则会返回None。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 对于多条数据的查询，我们可以使用find()方法，例如在这里查找年龄为20的数据，示例如下：</span></span><br><span class="line"> </span><br><span class="line">results = collection.find(&#123;<span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(results)</span><br><span class="line"><span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># &lt;pymongo.cursor.Cursor object at 0x1032d5128&gt;</span></span><br><span class="line"><span class="comment"># &#123;&#x27;_id&#x27;: ObjectId(&#x27;593278c115c2602667ec6bae&#x27;), &#x27;id&#x27;: &#x27;20170101&#x27;, &#x27;name&#x27;: &#x27;Jordan&#x27;, &#x27;age&#x27;: 20, &#x27;gender&#x27;: &#x27;male&#x27;&#125;</span></span><br><span class="line"><span class="comment"># &#123;&#x27;_id&#x27;: ObjectId(&#x27;593278c815c2602678bb2b8d&#x27;), &#x27;id&#x27;: &#x27;20170102&#x27;, &#x27;name&#x27;: &#x27;Kevin&#x27;, &#x27;age&#x27;: 20, &#x27;gender&#x27;: &#x27;male&#x27;&#125;</span></span><br><span class="line"><span class="comment"># &#123;&#x27;_id&#x27;: ObjectId(&#x27;593278d815c260269d7645a8&#x27;), &#x27;id&#x27;: &#x27;20170103&#x27;, &#x27;name&#x27;: &#x27;Harden&#x27;, &#x27;age&#x27;: 20, &#x27;gender&#x27;: &#x27;male&#x27;&#125;</span></span><br><span class="line"><span class="comment"># 返回结果是Cursor类型，相当于一个生成器，我们需要遍历取到所有的结果，每一个结果都是字典类型。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 如果要查询年龄大于20的数据，则写法如下：</span></span><br><span class="line"> </span><br><span class="line">results = collection.find(&#123;<span class="string">&#x27;age&#x27;</span>: &#123;<span class="string">&#x27;$gt&#x27;</span>: <span class="number">20</span>&#125;&#125;)</span><br><span class="line"><span class="comment"># 在这里查询的条件键值已经不是单纯的数字了，而是一个字典，其键名为比较符号$gt，意思是大于，键值为20，这样便可以查询出所有</span></span><br><span class="line"><span class="comment"># 年龄大于20的数据。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 在这里将比较符号归纳如下表：</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">符号含义示例</span></span><br><span class="line"><span class="string">$lt小于&#123;&#x27;age&#x27;: &#123;&#x27;$lt&#x27;: 20&#125;&#125;</span></span><br><span class="line"><span class="string">$gt大于&#123;&#x27;age&#x27;: &#123;&#x27;$gt&#x27;: 20&#125;&#125;</span></span><br><span class="line"><span class="string">$lte小于等于&#123;&#x27;age&#x27;: &#123;&#x27;$lte&#x27;: 20&#125;&#125;</span></span><br><span class="line"><span class="string">$gte大于等于&#123;&#x27;age&#x27;: &#123;&#x27;$gte&#x27;: 20&#125;&#125;</span></span><br><span class="line"><span class="string">$ne不等于&#123;&#x27;age&#x27;: &#123;&#x27;$ne&#x27;: 20&#125;&#125;</span></span><br><span class="line"><span class="string">$in在范围内&#123;&#x27;age&#x27;: &#123;&#x27;$in&#x27;: [20, 23]&#125;&#125;</span></span><br><span class="line"><span class="string">$nin不在范围内&#123;&#x27;age&#x27;: &#123;&#x27;$nin&#x27;: [20, 23]&#125;&#125;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 另外还可以进行正则匹配查询，例如查询名字以M开头的学生数据，示例如下：</span></span><br><span class="line"> </span><br><span class="line">results = collection.find(&#123;<span class="string">&#x27;name&#x27;</span>: &#123;<span class="string">&#x27;$regex&#x27;</span>: <span class="string">&#x27;^M.*&#x27;</span>&#125;&#125;)</span><br><span class="line"><span class="comment"># 在这里使用了$regex来指定正则匹配，^M.*代表以M开头的正则表达式，这样就可以查询所有符合该正则的结果。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 在这里将一些功能符号再归类如下：</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">符号含义示例示例含义</span></span><br><span class="line"><span class="string">$regex匹配正则&#123;&#x27;name&#x27;: &#123;&#x27;$regex&#x27;: &#x27;^M.*&#x27;&#125;&#125;name以M开头</span></span><br><span class="line"><span class="string">$exists属性是否存在&#123;&#x27;name&#x27;: &#123;&#x27;$exists&#x27;: True&#125;&#125;name属性存在</span></span><br><span class="line"><span class="string">$type类型判断&#123;&#x27;age&#x27;: &#123;&#x27;$type&#x27;: &#x27;int&#x27;&#125;&#125;age的类型为int</span></span><br><span class="line"><span class="string">$mod数字模操作&#123;&#x27;age&#x27;: &#123;&#x27;$mod&#x27;: [5, 0]&#125;&#125;年龄模5余0</span></span><br><span class="line"><span class="string">$text文本查询&#123;&#x27;$text&#x27;: &#123;&#x27;$search&#x27;: &#x27;Mike&#x27;&#125;&#125;text类型的属性中包含Mike字符串</span></span><br><span class="line"><span class="string">$where高级条件查询&#123;&#x27;$where&#x27;: &#x27;obj.fans_count == obj.follows_count&#x27;&#125;自身粉丝数等于关注数</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 这些操作的更详细用法在可以在MongoDB官方文档找到：</span></span><br><span class="line"><span class="comment"># https://docs.mongodb.com/manual/reference/operator/query/</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 计数</span></span><br><span class="line"><span class="comment"># 要统计查询结果有多少条数据，可以调用count()方法，如统计所有数据条数：</span></span><br><span class="line"> </span><br><span class="line">count = collection.find().count()</span><br><span class="line"><span class="built_in">print</span>(count)</span><br><span class="line"><span class="comment"># 或者统计符合某个条件的数据：</span></span><br><span class="line"> </span><br><span class="line">count = collection.find(&#123;<span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>&#125;).count()</span><br><span class="line"><span class="built_in">print</span>(count)</span><br><span class="line"><span class="comment"># 排序</span></span><br><span class="line"><span class="comment"># 可以调用sort方法，传入排序的字段及升降序标志即可，示例如下：</span></span><br><span class="line"> </span><br><span class="line">results = collection.find().sort(<span class="string">&#x27;name&#x27;</span>, pymongo.ASCENDING)</span><br><span class="line"><span class="built_in">print</span>([result[<span class="string">&#x27;name&#x27;</span>] <span class="keyword">for</span> result <span class="keyword">in</span> results])</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># [&#x27;Harden&#x27;, &#x27;Jordan&#x27;, &#x27;Kevin&#x27;, &#x27;Mark&#x27;, &#x27;Mike&#x27;]</span></span><br><span class="line"><span class="comment"># 偏移,可能想只取某几个元素，在这里可以利用skip()方法偏移几个位置，比如偏移2，就忽略前2个元素，得到第三个及以后的元素。</span></span><br><span class="line"> </span><br><span class="line">results = collection.find().sort(<span class="string">&#x27;name&#x27;</span>, pymongo.ASCENDING).skip(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>([result[<span class="string">&#x27;name&#x27;</span>] <span class="keyword">for</span> result <span class="keyword">in</span> results])</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment"># [&#x27;Kevin&#x27;, &#x27;Mark&#x27;, &#x27;Mike&#x27;]</span></span><br><span class="line"><span class="comment"># 另外还可以用limit()方法指定要取的结果个数，示例如下：</span></span><br><span class="line"> </span><br><span class="line">results = collection.find().sort(<span class="string">&#x27;name&#x27;</span>, pymongo.ASCENDING).skip(<span class="number">2</span>).limit(<span class="number">2</span>)</span><br><span class="line"><span class="built_in">print</span>([result[<span class="string">&#x27;name&#x27;</span>] <span class="keyword">for</span> result <span class="keyword">in</span> results])</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment"># [&#x27;Kevin&#x27;, &#x27;Mark&#x27;]</span></span><br><span class="line"><span class="comment"># 如果不加limit()原本会返回三个结果，加了限制之后，会截取2个结果返回。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 值得注意的是，在数据库数量非常庞大的时候，如千万、亿级别，最好不要使用大的偏移量来查询数据，很可能会导致内存溢出，</span></span><br><span class="line"><span class="comment"># 可以使用类似find(&#123;&#x27;_id&#x27;: &#123;&#x27;$gt&#x27;: ObjectId(&#x27;593278c815c2602678bb2b8d&#x27;)&#125;&#125;) 这样的方法来查询，记录好上次查询的_id。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line"><span class="comment"># 对于数据更新可以使用update()方法，指定更新的条件和更新后的数据即可，例如：</span></span><br><span class="line"> </span><br><span class="line">condition = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Kevin&#x27;</span>&#125;</span><br><span class="line">student = collection.find_one(condition)</span><br><span class="line">student[<span class="string">&#x27;age&#x27;</span>] = <span class="number">25</span></span><br><span class="line">result = collection.update(condition, student)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 在这里我们将name为Kevin的数据的年龄进行更新，首先指定查询条件，然后将数据查询出来，修改年龄，</span></span><br><span class="line"><span class="comment"># 之后调用update方法将原条件和修改后的数据传入，即可完成数据的更新。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># &#123;&#x27;ok&#x27;: 1, &#x27;nModified&#x27;: 1, &#x27;n&#x27;: 1, &#x27;updatedExisting&#x27;: True&#125;</span></span><br><span class="line"><span class="comment"># 返回结果是字典形式，ok即代表执行成功，nModified代表影响的数据条数。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 另外update()方法其实也是官方不推荐使用的方法，在这里也分了update_one()方法和update_many()方法，用法更加严格，</span></span><br><span class="line"><span class="comment"># 第二个参数需要使用$类型操作符作为字典的键名，我们用示例感受一下。</span></span><br><span class="line"> </span><br><span class="line">condition = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Kevin&#x27;</span>&#125;</span><br><span class="line">student = collection.find_one(condition)</span><br><span class="line">student[<span class="string">&#x27;age&#x27;</span>] = <span class="number">26</span></span><br><span class="line">result = collection.update_one(condition, &#123;<span class="string">&#x27;$set&#x27;</span>: student&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.matched_count, result.modified_count)</span><br><span class="line"><span class="comment"># 在这里调用了update_one方法，第二个参数不能再直接传入修改后的字典，而是需要使用&#123;&#x27;$set&#x27;: student&#125;这样的形式，</span></span><br><span class="line"><span class="comment"># 其返回结果是UpdateResult类型，然后调用matched_count和modified_count属性分别可以获得匹配的数据条数和影响的数据条数。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># &lt;pymongo.results.UpdateResult object at 0x10d17b678&gt;</span></span><br><span class="line"><span class="comment"># 1 0</span></span><br><span class="line"><span class="comment"># 我们再看一个例子：</span></span><br><span class="line"> </span><br><span class="line">condition = &#123;<span class="string">&#x27;age&#x27;</span>: &#123;<span class="string">&#x27;$gt&#x27;</span>: <span class="number">20</span>&#125;&#125;</span><br><span class="line">result = collection.update_one(condition, &#123;<span class="string">&#x27;$inc&#x27;</span>: &#123;<span class="string">&#x27;age&#x27;</span>: <span class="number">1</span>&#125;&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.matched_count, result.modified_count)</span><br><span class="line"><span class="comment"># 在这里我们指定查询条件为年龄大于20，然后更新条件为&#123;&#x27;$inc&#x27;: &#123;&#x27;age&#x27;: 1&#125;&#125;，执行之后会讲第一条符合条件的数据年龄加1。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># &lt;pymongo.results.UpdateResult object at 0x10b8874c8&gt;</span></span><br><span class="line"><span class="comment"># 1 1</span></span><br><span class="line"><span class="comment"># 可以看到匹配条数为1条，影响条数也为1条。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 如果调用update_many()方法，则会将所有符合条件的数据都更新，示例如下：</span></span><br><span class="line"> </span><br><span class="line">condition = &#123;<span class="string">&#x27;age&#x27;</span>: &#123;<span class="string">&#x27;$gt&#x27;</span>: <span class="number">20</span>&#125;&#125;</span><br><span class="line">result = collection.update_many(condition, &#123;<span class="string">&#x27;$inc&#x27;</span>: &#123;<span class="string">&#x27;age&#x27;</span>: <span class="number">1</span>&#125;&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.matched_count, result.modified_count)</span><br><span class="line"><span class="comment"># 这时候匹配条数就不再为1条了，运行结果如下：</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># &lt;pymongo.results.UpdateResult object at 0x10c6384c8&gt;</span></span><br><span class="line"><span class="comment"># 3 3</span></span><br><span class="line"><span class="comment"># 可以看到这时所有匹配到的数据都会被更新。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line"><span class="comment"># 删除操作比较简单，直接调用remove()方法指定删除的条件即可，符合条件的所有数据均会被删除，示例如下：</span></span><br><span class="line"> </span><br><span class="line">result = collection.remove(&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Kevin&#x27;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># &#123;&#x27;ok&#x27;: 1, &#x27;n&#x27;: 1&#125;</span></span><br><span class="line"><span class="comment"># 另外依然存在两个新的推荐方法，delete_one()和delete_many()方法，示例如下：</span></span><br><span class="line"> </span><br><span class="line">result = collection.delete_one(&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Kevin&#x27;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)</span><br><span class="line"><span class="built_in">print</span>(result.deleted_count)</span><br><span class="line">result = collection.delete_many(&#123;<span class="string">&#x27;age&#x27;</span>: &#123;<span class="string">&#x27;$lt&#x27;</span>: <span class="number">25</span>&#125;&#125;)</span><br><span class="line"><span class="built_in">print</span>(result.deleted_count)</span><br><span class="line"><span class="comment"># 运行结果：</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># &lt;pymongo.results.DeleteResult object at 0x10e6ba4c8&gt;</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 4</span></span><br><span class="line"><span class="comment"># delete_one()即删除第一条符合条件的数据，delete_many()即删除所有符合条件的数据，返回结果是DeleteResult类型，</span></span><br><span class="line"><span class="comment"># 可以调用deleted_count属性获取删除的数据条数。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 更多</span></span><br><span class="line"><span class="comment"># 另外PyMongo还提供了一些组合方法，如find_one_and_delete()、find_one_and_replace()、find_one_and_update()，</span></span><br><span class="line"><span class="comment"># 就是查找后删除、替换、更新操作，用法与上述方法基本一致。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 另外还可以对索引进行操作，如create_index()、create_indexes()、drop_index()等。</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 详细用法可以参见官方文档：http://api.mongodb.com/python/current/api/pymongo/collection.html</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 另外还有对数据库、集合本身以及其他的一些操作，在这不再一一讲解，可以参见</span></span><br><span class="line"><span class="comment"># 官方文档：http://api.mongodb.com/python/current/api/pymongo/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&text=Python-pymongo"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&is_video=false&description=Python-pymongo"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python-pymongo&body=Check out this article: https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&title=Python-pymongo"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&name=Python-pymongo&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/&t=Python-pymongo"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="docker笔记2本次实现将代码在github上托管,使用git命令配合docker-compose更新线上代码先放上 Dockerfile 和 docker-compose.yml 后面会用到Dockerfile12345FROM python:latestADD . &#x2F;zlkWORKDIR &#x2F;zlkRUN pip install -r zlkreq.txtCMD [&quot;python&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker笔记2">
+<meta property="og:url" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="docker笔记2本次实现将代码在github上托管,使用git命令配合docker-compose更新线上代码先放上 Dockerfile 和 docker-compose.yml 后面会用到Dockerfile12345FROM python:latestADD . &#x2F;zlkWORKDIR &#x2F;zlkRUN pip install -r zlkreq.txtCMD [&quot;python&amp;q">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-02-21T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:16.834Z">
+<meta property="article:author" content="Likang">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="服务器">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Docker笔记2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&text=Docker笔记2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&is_video=false&description=Docker笔记2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker笔记2&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&name=Docker笔记2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&t=Docker笔记2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E7%AC%94%E8%AE%B02"><span class="toc-number">1.</span> <span class="toc-text">docker笔记2</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9C%AC%E6%AC%A1%E5%AE%9E%E7%8E%B0%E5%B0%86%E4%BB%A3%E7%A0%81%E5%9C%A8github%E4%B8%8A%E6%89%98%E7%AE%A1"><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">本次实现将代码在github上托管,</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8git%E5%91%BD%E4%BB%A4%E9%85%8D%E5%90%88docker-compose%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E4%BB%A3%E7%A0%81"><span class="toc-number">1.0.0.0.0.2.</span> <span class="toc-text">使用git命令配合docker-compose更新线上代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E6%94%BE%E4%B8%8A-Dockerfile-%E5%92%8C-docker-compose-yml-%E5%90%8E%E9%9D%A2%E4%BC%9A%E7%94%A8%E5%88%B0"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">先放上 Dockerfile 和 docker-compose.yml 后面会用到</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.0.0.1.0.1.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">1.0.0.1.0.2.</span> <span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.0.0.1.0.3.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E5%90%AF"><span class="toc-number">1.0.0.1.0.4.</span> <span class="toc-text">重启</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Compose"><span class="toc-number">1.1.</span> <span class="toc-text">Docker-Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Compose-%E6%98%AF%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E5%92%8C%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%AE%B9%E5%99%A8%E7%9A%84-Docker-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E3%80%82%E5%9C%A8-Compose-%E4%B8%AD%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-YAML-%E6%96%87%E4%BB%B6%E6%9D%A5%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E3%80%82%E7%84%B6%E5%90%8E%EF%BC%8C%E5%8F%AA%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%90%AF%E5%8A%A8%E4%BD%A0%E9%85%8D%E7%BD%AE%E7%9A%84%E6%89%80%E6%9C%89%E6%9C%8D%E5%8A%A1%E3%80%82"><span class="toc-number">1.1.0.0.0.1.</span> <span class="toc-text">Compose 是一个用户定义和运行多个容器的 Docker 应用程序。在 Compose 中你可以使用 YAML 文件来配置你的应用服务。然后，只需要一个简单的命令，就可以创建并启动你配置的所有服务。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Compose-%E5%9F%BA%E6%9C%AC%E4%BC%9A%E6%9C%89%E5%A6%82%E4%B8%8B%E4%B8%89%E6%AD%A5%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.1.0.0.0.2.</span> <span class="toc-text">使用 Compose 基本会有如下三步流程：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9C%A8-Dockfile-%E4%B8%AD%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8%E7%8E%AF%E5%A2%83%EF%BC%8C%E4%BD%BF%E5%85%B6%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%BB%E4%BD%95%E5%9C%B0%E6%96%B9%E5%A4%8D%E5%88%B6%E3%80%82"><span class="toc-number">1.1.0.0.0.3.</span> <span class="toc-text">在 Dockfile 中定义你的应用环境，使其可以在任何地方复制。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9C%A8-docker-compose-yml-%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%BB%84%E6%88%90%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%8D%E5%8A%A1%EF%BC%8C%E4%BB%A5%E4%BE%BF%E5%AE%83%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%9C%A8%E9%9A%94%E7%A6%BB%E7%9A%84%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%B8%80%E8%B5%B7%E8%BF%90%E8%A1%8C%E3%80%82"><span class="toc-number">1.1.0.0.0.4.</span> <span class="toc-text">在 docker-compose.yml 中定义组成应用程序的服务，以便它们可以在隔离的环境中一起运行。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%EF%BC%8C%E8%BF%90%E8%A1%8Cdcoker-compose-up%EF%BC%8CCompose-%E5%B0%86%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%BF%90%E8%A1%8C%E6%95%B4%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E3%80%82"><span class="toc-number">1.1.0.0.0.5.</span> <span class="toc-text">最后，运行dcoker-compose up，Compose 将启动并运行整个应用程序。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">我的准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">开始</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%A1%A5%E5%85%85"><span class="toc-number">1.2.</span> <span class="toc-text">其他补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#docker-compose-%E5%9C%A8dockerfile%E6%9B%B4%E6%96%B0%E5%90%8E%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0image"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">docker-compose 在dockerfile更新后自动更新image</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Docker笔记2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-02-21T04:00:00.000Z" itemprop="datePublished">2019-02-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="https://likang00.github.io/zoo/categories/Docker/">Docker</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/Docker/" rel="tag">Docker</a>, <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="docker笔记2"><a href="#docker笔记2" class="headerlink" title="docker笔记2"></a>docker笔记2</h1><h6 id="本次实现将代码在github上托管"><a href="#本次实现将代码在github上托管" class="headerlink" title="本次实现将代码在github上托管,"></a>本次实现将代码在github上托管,</h6><h6 id="使用git命令配合docker-compose更新线上代码"><a href="#使用git命令配合docker-compose更新线上代码" class="headerlink" title="使用git命令配合docker-compose更新线上代码"></a>使用git命令配合docker-compose更新线上代码</h6><h4 id="先放上-Dockerfile-和-docker-compose-yml-后面会用到"><a href="#先放上-Dockerfile-和-docker-compose-yml-后面会用到" class="headerlink" title="先放上 Dockerfile 和 docker-compose.yml 后面会用到"></a>先放上 Dockerfile 和 docker-compose.yml 后面会用到</h4><h6 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM python:latest</span><br><span class="line">ADD . /zlk</span><br><span class="line">WORKDIR /zlk</span><br><span class="line">RUN pip install -r zlkreq.txt</span><br><span class="line">CMD [&quot;python&quot;, &quot;myapp.py&quot;]</span><br></pre></td></tr></table></figure>
+<h6 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">version: &#x27;3&#x27;</span><br><span class="line">services:</span><br><span class="line">  zlkweb:</span><br><span class="line">    build: .</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;80:5001&quot;</span><br><span class="line">    volumes:</span><br><span class="line">      - .:/zlk</span><br></pre></td></tr></table></figure>
+<h6 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h6><p><code>docker-compose up -d</code></p>
+<h6 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h6><p><code>docker-compose restart</code></p>
+<hr>
+<h2 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker-Compose"></a>Docker-Compose</h2><h6 id="Compose-是一个用户定义和运行多个容器的-Docker-应用程序。在-Compose-中你可以使用-YAML-文件来配置你的应用服务。然后，只需要一个简单的命令，就可以创建并启动你配置的所有服务。"><a href="#Compose-是一个用户定义和运行多个容器的-Docker-应用程序。在-Compose-中你可以使用-YAML-文件来配置你的应用服务。然后，只需要一个简单的命令，就可以创建并启动你配置的所有服务。" class="headerlink" title="Compose 是一个用户定义和运行多个容器的 Docker 应用程序。在 Compose 中你可以使用 YAML 文件来配置你的应用服务。然后，只需要一个简单的命令，就可以创建并启动你配置的所有服务。"></a>Compose 是一个用户定义和运行多个容器的 Docker 应用程序。在 Compose 中你可以使用 YAML 文件来配置你的应用服务。然后，只需要一个简单的命令，就可以创建并启动你配置的所有服务。</h6><h6 id="使用-Compose-基本会有如下三步流程："><a href="#使用-Compose-基本会有如下三步流程：" class="headerlink" title="使用 Compose 基本会有如下三步流程："></a>使用 Compose 基本会有如下三步流程：</h6><h6 id="在-Dockfile-中定义你的应用环境，使其可以在任何地方复制。"><a href="#在-Dockfile-中定义你的应用环境，使其可以在任何地方复制。" class="headerlink" title="在 Dockfile 中定义你的应用环境，使其可以在任何地方复制。"></a>在 Dockfile 中定义你的应用环境，使其可以在任何地方复制。</h6><h6 id="在-docker-compose-yml-中定义组成应用程序的服务，以便它们可以在隔离的环境中一起运行。"><a href="#在-docker-compose-yml-中定义组成应用程序的服务，以便它们可以在隔离的环境中一起运行。" class="headerlink" title="在 docker-compose.yml 中定义组成应用程序的服务，以便它们可以在隔离的环境中一起运行。"></a>在 docker-compose.yml 中定义组成应用程序的服务，以便它们可以在隔离的环境中一起运行。</h6><h6 id="最后，运行dcoker-compose-up，Compose-将启动并运行整个应用程序。"><a href="#最后，运行dcoker-compose-up，Compose-将启动并运行整个应用程序。" class="headerlink" title="最后，运行dcoker-compose up，Compose 将启动并运行整个应用程序。"></a>最后，运行dcoker-compose up，Compose 将启动并运行整个应用程序。</h6><h4 id="我的准备工作"><a href="#我的准备工作" class="headerlink" title="我的准备工作"></a>我的准备工作</h4><p>0.1购买云服务器 安装SSH远程终端工具<br>我使用的云服务器是 腾讯云<br>云主机使用的系统是 CentOS<br>SSH使用 Xshell6</p>
+<p>0.2.将想要部署的项目上传到github上<br>本次使用的项目是 图灵程序设计丛书 Flask Web 开发中的项目<br>项目地址:<br><a target="_blank" rel="noopener" href="https://github.com/miguelgrinberg/flasky">https://github.com/miguelgrinberg/flasky</a></p>
+<p>我的github项目地址:<br>(暂时有个人配置 后续修改后放上来)</p>
+<p>0.3确认你已经云服务器中安装了 Docker 与 Docker Compose<br>上篇已经介绍过 这次略过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y docker # 安装docker</span><br><span class="line">systemctl start docker # 启动docker</span><br><span class="line">docker search python # 查找python镜像</span><br><span class="line">docker pull python # 拉取镜像</span><br><span class="line">docker run -it python &quot;/bin/bash&quot;</span><br><span class="line"></span><br><span class="line">python -V</span><br><span class="line">pip -V</span><br><span class="line">pip list</span><br><span class="line">pip install xxx</span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line">docker commit xxxxxxxxxxxx(上面的镜像编号) python:latest # 保存自己的python镜像</span><br></pre></td></tr></table></figure>
+
+<h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><p>1 定义应用依赖<br>建文件夹cd进去<br>git clone xxx 拉代码<br>git checkout xxx 切换到指定分支</p>
+<p>2 创建 Dockerfile<br>在你的项目路径下创建一个 Dockerfile 文件<br>在工作路径下创建一个叫做 docker-compose.yml<br>编辑 Compose 文件添加一个绑定挂载<br>这个新的 volumes 键将当前路径（项目路径）与容器中的 /code 路径挂载到一起，允许你及时修改代码而不用重新构建镜像。(关键)<br>(需要修改文件 因为git中拉下来是我的配置)<br>你也可以通过 docker inspect <tag or id> 来检查镜像。</tag></p>
+<p>3 运行项目​<br>如果你希望你的应用程序在后台运行，你可以将 -d 标记传递给 docker-compose up 并使用<br>docker-compose up -d</p>
+<p>4 更新项目并重新部署<br>因为应用程序的代码通过 volume 挂载到容器中，你可以更改其代码并立即查看更改，而不必重新生成镜像。<br>只用在你的个人电脑上连接github 修改后<br>在云服务器项目目录下<br><strong>git pull</strong><br><strong>docker-compose restart</strong></p>
+<p>ok!</p>
+<h2 id="其他补充"><a href="#其他补充" class="headerlink" title="其他补充"></a>其他补充</h2><h4 id="docker-compose-在dockerfile更新后自动更新image"><a href="#docker-compose-在dockerfile更新后自动更新image" class="headerlink" title="docker-compose 在dockerfile更新后自动更新image"></a>docker-compose 在dockerfile更新后自动更新image</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">比如在dockerfile里需要新安装包</span><br><span class="line">RUN pip install XXX</span><br><span class="line">之后,希望docker-compose能更新镜像, 然后启动容器</span><br><span class="line">只需要启动时使用 --build即可:</span><br><span class="line"></span><br><span class="line">docker-compose stop</span><br><span class="line">docker-compose up -d --build</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">更新镜像时</span><br><span class="line">这样执行 docker-compose 命令</span><br><span class="line">docker-compose pull &amp;&amp; docker-compose up --force-recreate -d</span><br><span class="line">试试 docker-compose.yml 添加如下的配置</span><br><span class="line">services:</span><br><span class="line">  web:</span><br><span class="line">    deploy:</span><br><span class="line">      update_config:</span><br><span class="line">        order: start-first</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#docker%E7%AC%94%E8%AE%B02"><span class="toc-number">1.</span> <span class="toc-text">docker笔记2</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9C%AC%E6%AC%A1%E5%AE%9E%E7%8E%B0%E5%B0%86%E4%BB%A3%E7%A0%81%E5%9C%A8github%E4%B8%8A%E6%89%98%E7%AE%A1"><span class="toc-number">1.0.0.0.0.1.</span> <span class="toc-text">本次实现将代码在github上托管,</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8git%E5%91%BD%E4%BB%A4%E9%85%8D%E5%90%88docker-compose%E6%9B%B4%E6%96%B0%E7%BA%BF%E4%B8%8A%E4%BB%A3%E7%A0%81"><span class="toc-number">1.0.0.0.0.2.</span> <span class="toc-text">使用git命令配合docker-compose更新线上代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%88%E6%94%BE%E4%B8%8A-Dockerfile-%E5%92%8C-docker-compose-yml-%E5%90%8E%E9%9D%A2%E4%BC%9A%E7%94%A8%E5%88%B0"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">先放上 Dockerfile 和 docker-compose.yml 后面会用到</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Dockerfile"><span class="toc-number">1.0.0.1.0.1.</span> <span class="toc-text">Dockerfile</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">1.0.0.1.0.2.</span> <span class="toc-text">docker-compose.yml</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.0.0.1.0.3.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E5%90%AF"><span class="toc-number">1.0.0.1.0.4.</span> <span class="toc-text">重启</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Compose"><span class="toc-number">1.1.</span> <span class="toc-text">Docker-Compose</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Compose-%E6%98%AF%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7%E5%AE%9A%E4%B9%89%E5%92%8C%E8%BF%90%E8%A1%8C%E5%A4%9A%E4%B8%AA%E5%AE%B9%E5%99%A8%E7%9A%84-Docker-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E3%80%82%E5%9C%A8-Compose-%E4%B8%AD%E4%BD%A0%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8-YAML-%E6%96%87%E4%BB%B6%E6%9D%A5%E9%85%8D%E7%BD%AE%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E3%80%82%E7%84%B6%E5%90%8E%EF%BC%8C%E5%8F%AA%E9%9C%80%E8%A6%81%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%90%AF%E5%8A%A8%E4%BD%A0%E9%85%8D%E7%BD%AE%E7%9A%84%E6%89%80%E6%9C%89%E6%9C%8D%E5%8A%A1%E3%80%82"><span class="toc-number">1.1.0.0.0.1.</span> <span class="toc-text">Compose 是一个用户定义和运行多个容器的 Docker 应用程序。在 Compose 中你可以使用 YAML 文件来配置你的应用服务。然后，只需要一个简单的命令，就可以创建并启动你配置的所有服务。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Compose-%E5%9F%BA%E6%9C%AC%E4%BC%9A%E6%9C%89%E5%A6%82%E4%B8%8B%E4%B8%89%E6%AD%A5%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.1.0.0.0.2.</span> <span class="toc-text">使用 Compose 基本会有如下三步流程：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9C%A8-Dockfile-%E4%B8%AD%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%BA%94%E7%94%A8%E7%8E%AF%E5%A2%83%EF%BC%8C%E4%BD%BF%E5%85%B6%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%BB%E4%BD%95%E5%9C%B0%E6%96%B9%E5%A4%8D%E5%88%B6%E3%80%82"><span class="toc-number">1.1.0.0.0.3.</span> <span class="toc-text">在 Dockfile 中定义你的应用环境，使其可以在任何地方复制。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9C%A8-docker-compose-yml-%E4%B8%AD%E5%AE%9A%E4%B9%89%E7%BB%84%E6%88%90%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%8D%E5%8A%A1%EF%BC%8C%E4%BB%A5%E4%BE%BF%E5%AE%83%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%9C%A8%E9%9A%94%E7%A6%BB%E7%9A%84%E7%8E%AF%E5%A2%83%E4%B8%AD%E4%B8%80%E8%B5%B7%E8%BF%90%E8%A1%8C%E3%80%82"><span class="toc-number">1.1.0.0.0.4.</span> <span class="toc-text">在 docker-compose.yml 中定义组成应用程序的服务，以便它们可以在隔离的环境中一起运行。</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%EF%BC%8C%E8%BF%90%E8%A1%8Cdcoker-compose-up%EF%BC%8CCompose-%E5%B0%86%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%BF%90%E8%A1%8C%E6%95%B4%E4%B8%AA%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E3%80%82"><span class="toc-number">1.1.0.0.0.5.</span> <span class="toc-text">最后，运行dcoker-compose up，Compose 将启动并运行整个应用程序。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">我的准备工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">开始</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%A1%A5%E5%85%85"><span class="toc-number">1.2.</span> <span class="toc-text">其他补充</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#docker-compose-%E5%9C%A8dockerfile%E6%9B%B4%E6%96%B0%E5%90%8E%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0image"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">docker-compose 在dockerfile更新后自动更新image</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&text=Docker笔记2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&is_video=false&description=Docker笔记2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker笔记2&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&name=Docker笔记2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&t=Docker笔记2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

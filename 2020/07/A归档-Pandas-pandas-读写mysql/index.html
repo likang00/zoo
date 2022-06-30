@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="pandas-mysql使用pandas可以方便快捷地读写mysql，使用sql语句直接查询，DataFrame直接存入数据库甚至不用建表结构。 建立连接示例123import pandas as pdfrom sqlalchemy import create_engineengine &#x3D; create_engine(&amp;#x27;mysql+pymysql:&#x2F;&#x2F;root:admin@localho">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas-读写mysql">
+<meta property="og:url" content="https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="pandas-mysql使用pandas可以方便快捷地读写mysql，使用sql语句直接查询，DataFrame直接存入数据库甚至不用建表结构。 建立连接示例123import pandas as pdfrom sqlalchemy import create_engineengine &#x3D; create_engine(&amp;#x27;mysql+pymysql:&#x2F;&#x2F;root:admin@localho">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-07-03T07:38:28.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:59:08.313Z">
+<meta property="article:author" content="Likang">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>pandas-读写mysql</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2022/06/B%E6%8A%80%E6%9C%AF-2022-06-29-%E5%88%A9%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B01/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2020/06/A%E5%BD%92%E6%A1%A3-Pandas-pandasql-%E5%9C%A8pandas%E4%B8%AD%E8%BF%90%E8%A1%8Csql/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&text=pandas-读写mysql"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&is_video=false&description=pandas-读写mysql"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=pandas-读写mysql&body=Check out this article: https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&name=pandas-读写mysql&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&t=pandas-读写mysql"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas-mysql"><span class="toc-number">1.</span> <span class="toc-text">pandas-mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text">建立连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.0.1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">2.0.2.</span> <span class="toc-text">参数说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%95%B0%E6%8D%AE-pd-read-sql"><span class="toc-number">3.</span> <span class="toc-text">读数据 pd.read_sql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E6%95%B0%E6%8D%AE-df-to-sql"><span class="toc-number">4.</span> <span class="toc-text">写数据 df.to_sql</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">参数说明</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        pandas-读写mysql
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-07-03T07:38:28.000Z" itemprop="datePublished">2020-07-03</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="https://likang00.github.io/zoo/categories/pandas/">pandas</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="pandas-mysql"><a href="#pandas-mysql" class="headerlink" title="pandas-mysql"></a>pandas-mysql</h2><p>使用pandas可以方便快捷地读写mysql，使用sql语句直接查询，DataFrame直接存入数据库甚至不用建表结构。</p>
+<h2 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h2><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line">engine = create_engine(<span class="string">&#x27;mysql+pymysql://root:admin@localhost:3306/test&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h4><ul>
+<li>engine = create_engine(‘dialect+driver://username:password@host:port/database’)</li>
+<li><ul>
+<li>dialect – 数据库类型</li>
+</ul>
+</li>
+<li><ul>
+<li>driver – 数据库驱动选择</li>
+</ul>
+</li>
+<li><ul>
+<li>username – 数据库用户名</li>
+</ul>
+</li>
+<li><ul>
+<li>password – 用户密码</li>
+</ul>
+</li>
+<li><ul>
+<li>host 服务器地址</li>
+</ul>
+</li>
+<li><ul>
+<li>port 端口</li>
+</ul>
+</li>
+<li><ul>
+<li>database 数据库</li>
+</ul>
+</li>
+</ul>
+<h2 id="读数据-pd-read-sql"><a href="#读数据-pd-read-sql" class="headerlink" title="读数据 pd.read_sql"></a>读数据 pd.read_sql</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">&#x27;select * from table limit 1&#x27;</span></span><br><span class="line">df = pd.read_sql(sql, engine)</span><br></pre></td></tr></table></figure>
+
+<h2 id="写数据-df-to-sql"><a href="#写数据-df-to-sql" class="headerlink" title="写数据 df.to_sql"></a>写数据 df.to_sql</h2><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;&#x27;state&#x27;: [&#x27;Ohio&#x27;, &#x27;Ohio&#x27;, &#x27;Ohio&#x27;, &#x27;Nevada&#x27;, &#x27;Nevada&#x27;, &#x27;Nevada&#x27;],</span><br><span class="line">        &#x27;year&#x27;: [2000, 2001, 2002, 2001, 2002, 2003],</span><br><span class="line">        &#x27;pop&#x27;: [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]&#125;</span><br><span class="line">df = pd.DataFrame(data)</span><br><span class="line">df.to_sql(name=&#x27;df1&#x27;, con=engin, index=None, if_exisis=&#x27;replace&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数说明-1"><a href="#参数说明-1" class="headerlink" title="参数说明"></a>参数说明</h4><ul>
+<li>chunksize可以设置一次入库的大小</li>
+<li>if_exists设置如果数据库中表名存在时的操作</li>
+<li><ul>
+<li>replace表示将表原来数据删除放入当前数据</li>
+</ul>
+</li>
+<li><ul>
+<li>append表示追加</li>
+</ul>
+</li>
+<li><ul>
+<li>fail则表示将抛出异常，结束操作</li>
+</ul>
+</li>
+<li><ul>
+<li>默认是fail</li>
+</ul>
+</li>
+<li>index=接受boolean值，表示是否将DataFrame的index也作为表的列存储。</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+         
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas-mysql"><span class="toc-number">1.</span> <span class="toc-text">pandas-mysql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text">建立连接</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.0.1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="toc-number">2.0.2.</span> <span class="toc-text">参数说明</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E6%95%B0%E6%8D%AE-pd-read-sql"><span class="toc-number">3.</span> <span class="toc-text">读数据 pd.read_sql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E6%95%B0%E6%8D%AE-df-to-sql"><span class="toc-number">4.</span> <span class="toc-text">写数据 df.to_sql</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E-1"><span class="toc-number">4.0.2.</span> <span class="toc-text">参数说明</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&text=pandas-读写mysql"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&is_video=false&description=pandas-读写mysql"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=pandas-读写mysql&body=Check out this article: https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&title=pandas-读写mysql"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&name=pandas-读写mysql&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2020/07/A%E5%BD%92%E6%A1%A3-Pandas-pandas-%E8%AF%BB%E5%86%99mysql/&t=pandas-读写mysql"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://www.baidu.com">hello</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
