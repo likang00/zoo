@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="起因最近又想写点博客了，考虑到没有合适的网站，而且我对于把数据放在别人服务器上这种行为越来越不放心了，越复杂的系统内部的稳定性越差，风险越高。所以想把之前废弃的HEXO博客再捡起来。可以放到GitHubPage上托管，然后每篇文章都是markdown格式的，本地备份方便。这次完整记录一次搭建过程。先简单说说什么是hexo，其实就是一个博客框架，是基于node.js构建的，可以轻松生成静态页面。去某">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用hexo搭建个人博客平台1">
+<meta property="og:url" content="2022/06/B%E6%8A%80%E6%9C%AF-2022-06-29-%E5%88%A9%E7%94%A8hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B01/index.html">
+<meta property="og:site_name" content="ZOO">
+<meta property="og:description" content="起因最近又想写点博客了，考虑到没有合适的网站，而且我对于把数据放在别人服务器上这种行为越来越不放心了，越复杂的系统内部的稳定性越差，风险越高。所以想把之前废弃的HEXO博客再捡起来。可以放到GitHubPage上托管，然后每篇文章都是markdown格式的，本地备份方便。这次完整记录一次搭建过程。先简单说说什么是hexo，其实就是一个博客框架，是基于node.js构建的，可以轻松生成静态页面。去某">
+<meta property="og:locale">
+<meta property="og:image" content="2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/image-20220630100617065.png">
+<meta property="article:published_time" content="2022-06-29T10:11:17.000Z">
+<meta property="article:modified_time" content="2022-06-30T05:54:41.586Z">
+<meta property="article:author" content="Likang">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/image-20220630100617065.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/zoo/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/zoo/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/zoo/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>利用hexo搭建个人博客平台1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/zoo/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&text=利用hexo搭建个人博客平台1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&is_video=false&description=利用hexo搭建个人博客平台1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用hexo搭建个人博客平台1&body=Check out this article: 2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&name=利用hexo搭建个人博客平台1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&t=利用hexo搭建个人博客平台1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">hexo的简单使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE%E5%92%8C%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.</span> <span class="toc-text">一些进阶配置和目录文件介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">配置文件的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">使用优化</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        利用hexo搭建个人博客平台1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">likang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-06-29T10:11:17.000Z" itemprop="datePublished">2022-06-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="categories/技术/">技术</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="tags/git/" rel="tag">git</a>, <a class="tag-link-link" href="tags/hexo/" rel="tag">hexo</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近又想写点博客了，考虑到没有合适的网站，而且我对于把数据放在别人服务器上这种行为越来越不放心了，越复杂的系统内部的稳定性越差，风险越高。所以想把之前废弃的HEXO博客再捡起来。可以放到GitHubPage上托管，然后每篇文章都是markdown格式的，本地备份方便。这次完整记录一次搭建过程。<br>先简单说说什么是hexo，其实就是一个博客框架，是基于node.js构建的，可以轻松生成静态页面。去某书、某园写博客，一是不自由、二是可能有广告、三是数据不好维护；自己买域名、服务器搭建博客，是自由了，但是成本比较高，不管是经济成本、时间成本，还是可维护性都很差，可以无聊时练练手，但是不适合做主力平台。这时hexo的好处就体现出来了，（开吹），一是简单，学习成本很低，搭建好之后平时也就用md写写文章，二是易于维护，几句固定代码生成静态页面，本地文件好修改好管理，三是可玩性高，可以换皮肤，加个live2D，加个数据统计插件等等。反正就是很省心，下面介绍步骤</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>以前记录这类问题，都是把命令行直接粘贴过来，完全不是一个合格的教程。过几天我自己看都蒙。所以以后的教程都尽量口语化，说清楚前因后果。不是越简单越好，适当的废话可以增强可读性。</p>
+<ol>
+<li>首先就是要安装node.js，这个简单pass，可以直接看第二部，看看版本，没装再回来安装</li>
+<li>然后是看看node和npm的版本<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure></li>
+<li>重点来了，安装hexo-cli<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+<li>可以新建项目了<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init xxx</span><br><span class="line">cd xxx</span><br></pre></td></tr></table></figure></li>
+<li>完事，理论上现在可以开始写博客了</li>
+</ol>
+<h2 id="hexo的简单使用"><a href="#hexo的简单使用" class="headerlink" title="hexo的简单使用"></a>hexo的简单使用</h2><p>基本命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo new &#x27;xxx&#x27; #新建文章</span><br><span class="line">hexo new page &quot;xxx&quot; #新建页面</span><br><span class="line">hexo generate #生成静态页面至public目录</span><br><span class="line">hexo server #开启预览访问端口（默认端口4000，&#x27;ctrl + c’关闭server）</span><br><span class="line">hexo deploy #部署到GitHub</span><br><span class="line">hexo help # 查看帮助</span><br><span class="line">hexo version #查看Hexo的版本</span><br></pre></td></tr></table></figure>
+
+<p>命令缩写</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo n #新建 </span><br><span class="line">hexo g #生成</span><br><span class="line">hexo s #预览</span><br><span class="line">hexo d #部署</span><br></pre></td></tr></table></figure>
+
+<h2 id="一些进阶配置和目录文件介绍"><a href="#一些进阶配置和目录文件介绍" class="headerlink" title="一些进阶配置和目录文件介绍"></a>一些进阶配置和目录文件介绍</h2><p>当我们新建一个项目后，项目文件夹下会生成一些文件</p>
+<p>node_modules: 依赖包（不用管）<br>public：存放生成的页面<br>scaffolds：生成文章的一些模板（模板可编辑）<br>source：用来存放你的文章（主要写文章的地方）<br>themes：主题（可修改）<br>_config.yml: 博客的配置文件（重要，需要按个人需求配置）</p>
+<h2 id="配置文件的设置"><a href="#配置文件的设置" class="headerlink" title="配置文件的设置"></a>配置文件的设置</h2><p>参考文档<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a></p>
+<h2 id="使用优化"><a href="#使用优化" class="headerlink" title="使用优化"></a>使用优化</h2><p>为了让hexo更好用，我一般会先进行一些设置</p>
+<ol>
+<li><p>新建目录文件夹及修改配置文件<br>在/source/_posts/下新建几个分类文件夹【A归档、B技术、C生活、D旅游】<br>修改_config.yml文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 线上发布用</span><br><span class="line"># url: https://likang00.github.io/zoo</span><br><span class="line"># 本地测试用</span><br><span class="line">url: localhost:4000/zoo</span><br><span class="line">root: /zoo/</span><br><span class="line">permalink: :year/:month/:title/</span><br><span class="line"></span><br><span class="line"># 自动生成文章名的格式</span><br><span class="line">new_post_name: A归档/:year-:month-:day-:title.md</span><br></pre></td></tr></table></figure></li>
+<li><p>修改模板文件<br>主要修改/scaffolds/post.md</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">permalink: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags: </span><br><span class="line">categories: </span><br><span class="line">default_category: </span><br><span class="line">author: likang</span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+<li><p>安装hexo-asset-image，更方便添加图片<br>在_config.yml中修改如下<br><code>post_asset_folder: true</code><br>在你的hexo项目目录下运行<br><code>npm install hexo-asset-image --save</code><br>然后有个历史bug改下<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42009500/article/details/118788129">https://blog.csdn.net/qq_42009500/article/details/118788129</a><br>在node_modules/hexo-asset-image/index.js文件中修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// $(this).attr(&#x27;src&#x27;, config.root + link + src);</span><br><span class="line">// console.info&amp;&amp;console.info(&quot;update link as:--&gt;&quot;+config.root + link + src);</span><br><span class="line">$(this).attr(&#x27;src&#x27;, data.permalink +src);</span><br><span class="line">console.info&amp;&amp;console.info(&quot;update link as:--&gt;&quot; + data.permalink + src);</span><br></pre></td></tr></table></figure></li>
+<li><p>修改Typora设置<br>粘贴图片时，自动在同名文件夹下复制图片文件<br><img src="2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/image-20220630100617065.png" alt="image-20220630100617065"></p>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/zoo/">Home</a></li>
+         
+          <li><a href="/zoo/about/">About</a></li>
+         
+          <li><a href="/zoo/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.</span> <span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">hexo的简单使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E8%BF%9B%E9%98%B6%E9%85%8D%E7%BD%AE%E5%92%8C%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="toc-number">4.</span> <span class="toc-text">一些进阶配置和目录文件介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">配置文件的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">使用优化</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&text=利用hexo搭建个人博客平台1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&is_video=false&description=利用hexo搭建个人博客平台1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=利用hexo搭建个人博客平台1&body=Check out this article: 2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&title=利用hexo搭建个人博客平台1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&name=利用hexo搭建个人博客平台1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2022/06/B技术-2022-06-29-利用hexo搭建个人博客平台1/&t=利用hexo搭建个人博客平台1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Likang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/zoo/">Home</a></li><!--
+     --><!--
+       --><li><a href="/zoo/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/zoo/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
