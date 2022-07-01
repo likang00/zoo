@@ -9,36 +9,36 @@
     <meta name="description" content="pymysql今天学习一下mysql，在python3中利用PyMySQL模块来操作。先安装包:pip install PyMySQL  1.语法速览123456789101112131、语法格式    对象名 &#x3D; pymysql.connect(&quot;主机地址&quot;,&quot;用户名&quot;,&quot;密码&quot;,&quot;库名&quot;,&quot;端口号&amp;quo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-pymysql">
-<meta property="og:url" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/index.html">
+<meta property="og:url" content="2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/index.html">
 <meta property="og:site_name" content="ZOO">
 <meta property="og:description" content="pymysql今天学习一下mysql，在python3中利用PyMySQL模块来操作。先安装包:pip install PyMySQL  1.语法速览123456789101112131、语法格式    对象名 &#x3D; pymysql.connect(&quot;主机地址&quot;,&quot;用户名&quot;,&quot;密码&quot;,&quot;库名&quot;,&quot;端口号&amp;quo">
 <meta property="og:locale">
-<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_INNER_JOIN.png">
+<meta property="og:image" content="2019/02/A归档-草稿-Python-pymysql/2019/02/A归档-草稿-Python-pymysql/o_INNER_JOIN.png">
 <meta property="og:image" content="https://images.cnblogs.com/cnblogs_com/spacescp/1383720/o_INNER_JOIN.png">
-<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_LEFT_OUTER_JOIN.png">
-<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_RIGHT_OUTER_JOIN.png">
-<meta property="og:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_FULL_OUTER_JOIN.png">
+<meta property="og:image" content="2019/02/A归档-草稿-Python-pymysql/2019/02/A归档-草稿-Python-pymysql/o_LEFT_OUTER_JOIN.png">
+<meta property="og:image" content="2019/02/A归档-草稿-Python-pymysql/2019/02/A归档-草稿-Python-pymysql/o_RIGHT_OUTER_JOIN.png">
+<meta property="og:image" content="2019/02/A归档-草稿-Python-pymysql/2019/02/A归档-草稿-Python-pymysql/o_FULL_OUTER_JOIN.png">
 <meta property="article:published_time" content="2019-02-28T15:01:21.000Z">
 <meta property="article:modified_time" content="2022-06-30T10:59:16.842Z">
 <meta property="article:author" content="Likang">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_INNER_JOIN.png">
+<meta name="twitter:image" content="2019/02/A归档-草稿-Python-pymysql/2019/02/A归档-草稿-Python-pymysql/o_INNER_JOIN.png">
     
     
       
         
-          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
+          <link rel="shortcut icon" href="/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
         
       
     
@@ -46,7 +46,7 @@
     <title>Python-pymysql</title>
     <!-- styles -->
     
-<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
     <!-- persian styles -->
     
@@ -67,15 +67,15 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+       --><li><a href="/">Home</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+       --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
+       --><li><a href="/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
+       --><li><a href="/tages/">tages</a></li><!--
      -->
       </ul>
     </span>
@@ -83,10 +83,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/04/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymongo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="2019/04/A归档-草稿-Python-pymongo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="2019/02/A归档-草稿-Docker笔记2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,17 +99,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&text=Python-pymysql"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&is_video=false&description=Python-pymysql"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python-pymysql&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&name=Python-pymysql&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&t=Python-pymysql"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2019/02/A归档-草稿-Python-pymysql/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2019/02/A归档-草稿-Python-pymysql/&text=Python-pymysql"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2019/02/A归档-草稿-Python-pymysql/&is_video=false&description=Python-pymysql"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python-pymysql&body=Check out this article: 2019/02/A归档-草稿-Python-pymysql/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2019/02/A归档-草稿-Python-pymysql/&name=Python-pymysql&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2019/02/A归档-草稿-Python-pymysql/&t=Python-pymysql"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -149,7 +149,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+        <a class="tag-link-link" href="tags/数据库/" rel="tag">数据库</a>
     </div>
 
 
@@ -227,7 +227,7 @@
 </code></pre>
 <h6 id="各种连接语句"><a href="#各种连接语句" class="headerlink" title="各种连接语句"></a>各种连接语句</h6><p><code>SELECT ... FROM tableA ??? JOIN tableB ON tableA.column1 = tableB.column2;</code></p>
 <p>1.INNER JOIN</p>
-<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_INNER_JOIN.png"></p>
+<p><img src="2019/02/A归档-草稿-Python-pymysql/o_INNER_JOIN.png"></p>
 <!-- <p align="center">
     <img src="https://images.cnblogs.com/cnblogs_com/spacescp/1383720/o_INNER_JOIN.png" alt="Sample"  width="100" height="50">
     <p align="center">
@@ -236,11 +236,11 @@
 </p> -->
 
 <h6 id="只返回同时存在于两张表的行数据"><a href="#只返回同时存在于两张表的行数据" class="headerlink" title="只返回同时存在于两张表的行数据"></a>只返回同时存在于两张表的行数据</h6><p>2.LEFT OUTER JOIN</p>
-<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_LEFT_OUTER_JOIN.png"></p>
+<p><img src="2019/02/A归档-草稿-Python-pymysql/o_LEFT_OUTER_JOIN.png"></p>
 <h6 id="返回左表都存在的行"><a href="#返回左表都存在的行" class="headerlink" title="返回左表都存在的行"></a>返回左表都存在的行</h6><p>3.RIGHT OUTER JOIN</p>
-<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_RIGHT_OUTER_JOIN.png"></p>
+<p><img src="2019/02/A归档-草稿-Python-pymysql/o_RIGHT_OUTER_JOIN.png"></p>
 <h6 id="返回右表都存在的行"><a href="#返回右表都存在的行" class="headerlink" title="返回右表都存在的行"></a>返回右表都存在的行</h6><p>4.FULL OUTER JOIN</p>
-<p><img src="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/o_FULL_OUTER_JOIN.png"></p>
+<p><img src="2019/02/A归档-草稿-Python-pymysql/o_FULL_OUTER_JOIN.png"></p>
 <h6 id="两张表的所有记录全部选择出来"><a href="#两张表的所有记录全部选择出来" class="headerlink" title="两张表的所有记录全部选择出来"></a>两张表的所有记录全部选择出来</h6><h4 id="补充"><a href="#补充" class="headerlink" title="-补充-"></a>-补充-</h4><h5 id="JOIN查询"><a href="#JOIN查询" class="headerlink" title="JOIN查询"></a>JOIN查询</h5><p>JOIN查询需要先确定主表，然后把另一个表的数据“附加”到结果集上；<br>INNER JOIN是最常用的一种JOIN查询，它的语法是SELECT … FROM &lt;表1&gt; INNER JOIN &lt;表2&gt; ON &lt;条件…&gt;；<br>JOIN查询仍然可以使用WHERE条件和ORDER BY排序。</p>
 <h5 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h5><table>
 <thead>
@@ -309,15 +309,15 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
+          <li><a href="/">Home</a></li>
          
-          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
+          <li><a href="/about/">About</a></li>
          
-          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
+          <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="https://likang00.github.io/zoo/categories/">categories</a></li>
+          <li><a href="/categories/">categories</a></li>
          
-          <li><a href="https://likang00.github.io/zoo/tages/">tages</a></li>
+          <li><a href="/tages/">tages</a></li>
         
       </ul>
     </div>
@@ -328,17 +328,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&text=Python-pymysql"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&is_video=false&description=Python-pymysql"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python-pymysql&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&title=Python-pymysql"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&name=Python-pymysql&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/&t=Python-pymysql"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2019/02/A归档-草稿-Python-pymysql/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2019/02/A归档-草稿-Python-pymysql/&text=Python-pymysql"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2019/02/A归档-草稿-Python-pymysql/&is_video=false&description=Python-pymysql"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python-pymysql&body=Check out this article: 2019/02/A归档-草稿-Python-pymysql/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2019/02/A归档-草稿-Python-pymysql/&title=Python-pymysql"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2019/02/A归档-草稿-Python-pymysql/&name=Python-pymysql&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2019/02/A归档-草稿-Python-pymysql/&t=Python-pymysql"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -366,15 +366,15 @@
     <nav>
       <ul>
         <!--
-       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
+       --><li><a href="/">Home</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
+       --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
+       --><li><a href="/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
+       --><li><a href="/tages/">tages</a></li><!--
      -->
       </ul>
     </nav>
@@ -422,7 +422,7 @@
   </script>
 
 
-<script src="https://likang00.github.io/zoo/js/main.js"></script>
+<script src="js/main.js"></script>
 
 <!-- search -->
 
@@ -438,5 +438,5 @@
 
 <!-- utterances Comments -->
 
-<script src="https://likang00.github.io/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
 </html>
