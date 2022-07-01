@@ -9,7 +9,7 @@
     <meta name="description" content="docker笔记2本次实现将代码在github上托管,使用git命令配合docker-compose更新线上代码先放上 Dockerfile 和 docker-compose.yml 后面会用到Dockerfile12345FROM python:latestADD . &#x2F;zlkWORKDIR &#x2F;zlkRUN pip install -r zlkreq.txtCMD [&quot;python&amp;q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker笔记2">
-<meta property="og:url" content="2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:url" content="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/index.html">
 <meta property="og:site_name" content="ZOO">
 <meta property="og:description" content="docker笔记2本次实现将代码在github上托管,使用git命令配合docker-compose更新线上代码先放上 Dockerfile 和 docker-compose.yml 后面会用到Dockerfile12345FROM python:latestADD . &#x2F;zlkWORKDIR &#x2F;zlkRUN pip install -r zlkreq.txtCMD [&quot;python&amp;q">
 <meta property="og:locale">
@@ -23,17 +23,17 @@
     
       
         
-          <link rel="shortcut icon" href="/images/favicon.ico">
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
         
       
     
@@ -41,7 +41,7 @@
     <title>Docker笔记2</title>
     <!-- styles -->
     
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
 
     <!-- persian styles -->
     
@@ -62,15 +62,15 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Home</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
      --><!--
-       --><li><a href="/about/">About</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="/categories/">categories</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/tages/">tages</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
      -->
       </ul>
     </span>
@@ -78,10 +78,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="2019/02/A归档-草稿-Python-pymysql/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Python-pymysql/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post" href="2019/01/A归档-草稿-Docker笔记1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -94,17 +94,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2019/02/A归档-草稿-Docker笔记2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2019/02/A归档-草稿-Docker笔记2/&text=Docker笔记2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2019/02/A归档-草稿-Docker笔记2/&is_video=false&description=Docker笔记2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Docker笔记2&body=Check out this article: 2019/02/A归档-草稿-Docker笔记2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2019/02/A归档-草稿-Docker笔记2/&name=Docker笔记2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2019/02/A归档-草稿-Docker笔记2/&t=Docker笔记2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&text=Docker笔记2"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&is_video=false&description=Docker笔记2"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker笔记2&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&name=Docker笔记2&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&t=Docker笔记2"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -142,14 +142,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="categories/Docker/">Docker</a>
+        <a class="category-link" href="https://likang00.github.io/zoo/categories/Docker/">Docker</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="tags/Docker/" rel="tag">Docker</a>, <a class="tag-link-link" href="tags/服务器/" rel="tag">服务器</a>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/Docker/" rel="tag">Docker</a>, <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">服务器</a>
     </div>
 
 
@@ -189,15 +189,15 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
          
-          <li><a href="/categories/">categories</a></li>
+          <li><a href="https://likang00.github.io/zoo/categories/">categories</a></li>
          
-          <li><a href="/tages/">tages</a></li>
+          <li><a href="https://likang00.github.io/zoo/tages/">tages</a></li>
         
       </ul>
     </div>
@@ -208,17 +208,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2019/02/A归档-草稿-Docker笔记2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2019/02/A归档-草稿-Docker笔记2/&text=Docker笔记2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2019/02/A归档-草稿-Docker笔记2/&is_video=false&description=Docker笔记2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Docker笔记2&body=Check out this article: 2019/02/A归档-草稿-Docker笔记2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2019/02/A归档-草稿-Docker笔记2/&title=Docker笔记2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2019/02/A归档-草稿-Docker笔记2/&name=Docker笔记2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2019/02/A归档-草稿-Docker笔记2/&t=Docker笔记2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&text=Docker笔记2"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&is_video=false&description=Docker笔记2"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Docker笔记2&body=Check out this article: https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&title=Docker笔记2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&name=Docker笔记2&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2019/02/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B02/&t=Docker笔记2"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -246,15 +246,15 @@
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Home</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
      --><!--
-       --><li><a href="/about/">About</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="/categories/">categories</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/tages/">tages</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
      -->
       </ul>
     </nav>
@@ -302,7 +302,7 @@
   </script>
 
 
-<script src="js/main.js"></script>
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
 
 <!-- search -->
 
@@ -318,5 +318,5 @@
 
 <!-- utterances Comments -->
 
-<script src="/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+<script src="https://likang00.github.io/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"https://likang00.github.io/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
 </html>

@@ -9,33 +9,33 @@
     <meta name="description" content="WSL介绍一下WIN10自带的一个非常强大的功能 – 子系统以及安装使用流程以及一些小坑，还有使用 图形用户界面 打开子系统中的Pycharm  1234567891011简单步骤速览：1.启动开发者服务(设置-&gt;更新-&gt;开发人员模式)2.控制面板启用linux子系统(控制面板-&gt;程序-&gt;启动或关闭Windows功能)3.安装ubuntu(16.04&#x2F;18.04)(WIN1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Win10子系统WSL">
-<meta property="og:url" content="2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/index.html">
+<meta property="og:url" content="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/index.html">
 <meta property="og:site_name" content="ZOO">
 <meta property="og:description" content="WSL介绍一下WIN10自带的一个非常强大的功能 – 子系统以及安装使用流程以及一些小坑，还有使用 图形用户界面 打开子系统中的Pycharm  1234567891011简单步骤速览：1.启动开发者服务(设置-&gt;更新-&gt;开发人员模式)2.控制面板启用linux子系统(控制面板-&gt;程序-&gt;启动或关闭Windows功能)3.安装ubuntu(16.04&#x2F;18.04)(WIN1">
 <meta property="og:locale">
-<meta property="og:image" content="2018/12/A归档-草稿-Win10子系统WSL/2018/12/A归档-草稿-Win10子系统WSL/wsl01.jpg">
-<meta property="og:image" content="2018/12/A归档-草稿-Win10子系统WSL/2018/12/A归档-草稿-Win10子系统WSL/wsl02.png">
+<meta property="og:image" content="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/wsl01.jpg">
+<meta property="og:image" content="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/wsl02.png">
 <meta property="article:published_time" content="2018-12-31T14:41:05.000Z">
 <meta property="article:modified_time" content="2022-06-30T10:59:16.846Z">
 <meta property="article:author" content="Likang">
 <meta property="article:tag" content="WSL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="2018/12/A归档-草稿-Win10子系统WSL/2018/12/A归档-草稿-Win10子系统WSL/wsl01.jpg">
+<meta name="twitter:image" content="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/wsl01.jpg">
     
     
       
         
-          <link rel="shortcut icon" href="/images/favicon.ico">
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
         
       
     
@@ -43,7 +43,7 @@
     <title>Win10子系统WSL</title>
     <!-- styles -->
     
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
 
     <!-- persian styles -->
     
@@ -64,15 +64,15 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Home</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
      --><!--
-       --><li><a href="/about/">About</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="/categories/">categories</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/tages/">tages</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
      -->
       </ul>
     </span>
@@ -80,10 +80,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="2019/01/A归档-草稿-Docker笔记1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2019/01/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Docker%E7%AC%94%E8%AE%B01/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post" href="2018/12/A归档-草稿-MongoDB聚合/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -96,17 +96,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2018/12/A归档-草稿-Win10子系统WSL/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2018/12/A归档-草稿-Win10子系统WSL/&text=Win10子系统WSL"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2018/12/A归档-草稿-Win10子系统WSL/&is_video=false&description=Win10子系统WSL"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Win10子系统WSL&body=Check out this article: 2018/12/A归档-草稿-Win10子系统WSL/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2018/12/A归档-草稿-Win10子系统WSL/&name=Win10子系统WSL&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2018/12/A归档-草稿-Win10子系统WSL/&t=Win10子系统WSL"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&text=Win10子系统WSL"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&is_video=false&description=Win10子系统WSL"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Win10子系统WSL&body=Check out this article: https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&name=Win10子系统WSL&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&t=Win10子系统WSL"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -146,7 +146,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="tags/WSL/" rel="tag">WSL</a>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/WSL/" rel="tag">WSL</a>
     </div>
 
 
@@ -156,7 +156,7 @@
 
   <div class="content" itemprop="articleBody">
     <h1 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h1><p>介绍一下WIN10自带的一个非常强大的功能 – <strong>子系统</strong><br>以及安装使用流程以及一些小坑，还有使用 <strong>图形用户界面</strong> 打开子系统中的Pycharm</p>
-<p><img src="2018/12/A归档-草稿-Win10子系统WSL/wsl01.jpg"></p>
+<p><img src="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/wsl01.jpg"></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">简单步骤速览：</span><br><span class="line">1.启动开发者服务</span><br><span class="line">(设置-&gt;更新-&gt;开发人员模式)</span><br><span class="line">2.控制面板启用linux子系统</span><br><span class="line">(控制面板-&gt;程序-&gt;启动或关闭Windows功能)</span><br><span class="line">3.安装ubuntu(16.04/18.04)</span><br><span class="line">(WIN10商店搜索下载)</span><br><span class="line">4.设置用户名密码</span><br><span class="line">5.安装python3.6(并指定版本)</span><br><span class="line">6.安装pip(并指定版本)</span><br><span class="line">7.安装虚拟环境及管理虚拟环境</span><br></pre></td></tr></table></figure>
 
 <p>重点说一下安装Python以及虚拟环境<br>安装python3.6</p>
@@ -184,7 +184,7 @@
 <p>ubuntu16.04上virtualenv和virtualenvwrapper安装及使用<br>玩转ubuntu18.04之virtualenv和virtualenvwrapper安装与使用</p>
 <hr>
 <p>改天介绍如何安装XLaunch可视化界面和Ubuntu中的Pycharm</p>
-<p><img src="2018/12/A归档-草稿-Win10子系统WSL/wsl02.png"></p>
+<p><img src="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/wsl02.png"></p>
 <p>1.安装Xming<br>2.安装完直接打开Xming即可<br>3.安装一个firefox测试<br>apt-get install firefox<br>4.运行(在程序指令前加上”DISPLAY=:0 “)<br>DISPLAY=:0 firefox<br>5.简化配置<br>每次运行程序都要输入DISPLAY=:0挺累的，执行下列指令后重启bash（输入bash，即可重启）即可省去这个步骤<br>echo “export DISPLAY=:0.0” &gt;&gt; ~/.bashrc<br>6.输入firefox，即可产生界面</p>
 
   </div>
@@ -199,15 +199,15 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
          
-          <li><a href="/categories/">categories</a></li>
+          <li><a href="https://likang00.github.io/zoo/categories/">categories</a></li>
          
-          <li><a href="/tages/">tages</a></li>
+          <li><a href="https://likang00.github.io/zoo/tages/">tages</a></li>
         
       </ul>
     </div>
@@ -218,17 +218,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2018/12/A归档-草稿-Win10子系统WSL/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2018/12/A归档-草稿-Win10子系统WSL/&text=Win10子系统WSL"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2018/12/A归档-草稿-Win10子系统WSL/&is_video=false&description=Win10子系统WSL"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Win10子系统WSL&body=Check out this article: 2018/12/A归档-草稿-Win10子系统WSL/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2018/12/A归档-草稿-Win10子系统WSL/&title=Win10子系统WSL"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2018/12/A归档-草稿-Win10子系统WSL/&name=Win10子系统WSL&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2018/12/A归档-草稿-Win10子系统WSL/&t=Win10子系统WSL"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&text=Win10子系统WSL"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&is_video=false&description=Win10子系统WSL"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Win10子系统WSL&body=Check out this article: https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&title=Win10子系统WSL"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&name=Win10子系统WSL&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/&t=Win10子系统WSL"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -256,15 +256,15 @@
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Home</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
      --><!--
-       --><li><a href="/about/">About</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="/categories/">categories</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/tages/">tages</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
      -->
       </ul>
     </nav>
@@ -312,7 +312,7 @@
   </script>
 
 
-<script src="js/main.js"></script>
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
 
 <!-- search -->
 
@@ -328,5 +328,5 @@
 
 <!-- utterances Comments -->
 
-<script src="/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+<script src="https://likang00.github.io/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"https://likang00.github.io/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
 </html>

@@ -9,7 +9,7 @@
     <meta name="description" content="聚合管道功能： 对文档进行过滤，查询出符合条件的文档 对文档进行变换，改变文档的输出形式  使用sanic_motor模块连接数据库123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354from sanic import Sanicfrom sanic.v">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB聚合">
-<meta property="og:url" content="2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/index.html">
+<meta property="og:url" content="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/index.html">
 <meta property="og:site_name" content="ZOO">
 <meta property="og:description" content="聚合管道功能： 对文档进行过滤，查询出符合条件的文档 对文档进行变换，改变文档的输出形式  使用sanic_motor模块连接数据库123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354from sanic import Sanicfrom sanic.v">
 <meta property="og:locale">
@@ -22,17 +22,17 @@
     
       
         
-          <link rel="shortcut icon" href="/images/favicon.ico">
+          <link rel="shortcut icon" href="https://likang00.github.io/zoo/images/favicon.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="https://likang00.github.io/zoo/images/favicon-192x192.png" sizes="192x192">
         
       
       
         
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          <link rel="apple-touch-icon" sizes="180x180" href="https://likang00.github.io/zoo/images/apple-touch-icon.png">
         
       
     
@@ -40,7 +40,7 @@
     <title>MongoDB聚合</title>
     <!-- styles -->
     
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://likang00.github.io/zoo/css/style.css">
 
     <!-- persian styles -->
     
@@ -61,15 +61,15 @@
     <span id="nav">
       <ul>
         <!--
-       --><li><a href="/">Home</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
      --><!--
-       --><li><a href="/about/">About</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="/categories/">categories</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/tages/">tages</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
      -->
       </ul>
     </span>
@@ -77,10 +77,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="2018/12/A归档-草稿-Win10子系统WSL/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-Win10%E5%AD%90%E7%B3%BB%E7%BB%9FWSL/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" aria-label="Next post" href="2018/11/A归档-草稿-MongoDB基础/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Next post" href="https://likang00.github.io/zoo/2018/11/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E5%9F%BA%E7%A1%80/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -93,17 +93,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2018/12/A归档-草稿-MongoDB聚合/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2018/12/A归档-草稿-MongoDB聚合/&text=MongoDB聚合"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2018/12/A归档-草稿-MongoDB聚合/&is_video=false&description=MongoDB聚合"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=MongoDB聚合&body=Check out this article: 2018/12/A归档-草稿-MongoDB聚合/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2018/12/A归档-草稿-MongoDB聚合/&name=MongoDB聚合&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2018/12/A归档-草稿-MongoDB聚合/&t=MongoDB聚合"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&text=MongoDB聚合"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&is_video=false&description=MongoDB聚合"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MongoDB聚合&body=Check out this article: https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&name=MongoDB聚合&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&t=MongoDB聚合"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -141,14 +141,14 @@
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="categories/db/">db</a>
+        <a class="category-link" href="https://likang00.github.io/zoo/categories/db/">db</a>
     </div>
 
 
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link-link" href="tags/数据库/" rel="tag">数据库</a>
+        <a class="tag-link-link" href="https://likang00.github.io/zoo/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
     </div>
 
 
@@ -215,15 +215,15 @@
     <div id="nav-footer" style="display: none">
       <ul>
          
-          <li><a href="/">Home</a></li>
+          <li><a href="https://likang00.github.io/zoo/">Home</a></li>
          
-          <li><a href="/about/">About</a></li>
+          <li><a href="https://likang00.github.io/zoo/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li>
          
-          <li><a href="/categories/">categories</a></li>
+          <li><a href="https://likang00.github.io/zoo/categories/">categories</a></li>
          
-          <li><a href="/tages/">tages</a></li>
+          <li><a href="https://likang00.github.io/zoo/tages/">tages</a></li>
         
       </ul>
     </div>
@@ -234,17 +234,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=2018/12/A归档-草稿-MongoDB聚合/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=2018/12/A归档-草稿-MongoDB聚合/&text=MongoDB聚合"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=2018/12/A归档-草稿-MongoDB聚合/&is_video=false&description=MongoDB聚合"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=MongoDB聚合&body=Check out this article: 2018/12/A归档-草稿-MongoDB聚合/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=2018/12/A归档-草稿-MongoDB聚合/&title=MongoDB聚合"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=2018/12/A归档-草稿-MongoDB聚合/&name=MongoDB聚合&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=2018/12/A归档-草稿-MongoDB聚合/&t=MongoDB聚合"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&text=MongoDB聚合"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&is_video=false&description=MongoDB聚合"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MongoDB聚合&body=Check out this article: https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&title=MongoDB聚合"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&name=MongoDB聚合&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://likang00.github.io/zoo/2018/12/A%E5%BD%92%E6%A1%A3-%E8%8D%89%E7%A8%BF-MongoDB%E8%81%9A%E5%90%88/&t=MongoDB聚合"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -272,15 +272,15 @@
     <nav>
       <ul>
         <!--
-       --><li><a href="/">Home</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/">Home</a></li><!--
      --><!--
-       --><li><a href="/about/">About</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/archives/">Writing</a></li><!--
      --><!--
-       --><li><a href="/categories/">categories</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/tages/">tages</a></li><!--
+       --><li><a href="https://likang00.github.io/zoo/tages/">tages</a></li><!--
      -->
       </ul>
     </nav>
@@ -328,7 +328,7 @@
   </script>
 
 
-<script src="js/main.js"></script>
+<script src="https://likang00.github.io/zoo/js/main.js"></script>
 
 <!-- search -->
 
@@ -344,5 +344,5 @@
 
 <!-- utterances Comments -->
 
-<script src="/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+<script src="https://likang00.github.io/zoo/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","tagMode":false,"debug":false,"model":{"jsonPath":"https://likang00.github.io/zoo/live2dw/assets/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":-15,"vOffset":-15},"mobile":{"show":true},"react":{"opacity":0.7},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
 </html>
