@@ -13,3 +13,5 @@ themes/
 *.json
 public/
 .deploy*/
+
+live2d_models/
